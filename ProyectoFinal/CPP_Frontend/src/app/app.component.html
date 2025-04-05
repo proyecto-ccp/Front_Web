@@ -1,0 +1,49 @@
+<div class="container">
+  <!--Logo-->
+  <div class="col-12 row">
+    <div class="col-12 logo-height">
+      <img src="../../assets/ccp1.png" class="logo">
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row col-12"> <!--d-flex justify-content-between-->
+
+      <div class="col-4 color-box">
+        <div class="col-12 col-md-4"> <!--d-flex justify-content-center align-items-center-->
+          <ul class="navbar-nav size-ul">
+            <li class="nav-item">
+              <a class="nav-link text-red type-text size-subtitles" href="#">Registrar Fabricantes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-red type-text size-subtitles" routerLink="/cargar-productos">Cargar Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-blue type-text size-subtitles" href="#">Registrar vendedores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-blue type-text size-subtitles" href="#">Crear Planes Venta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-blue type-text size-subtitles" href="#">Consultar Reportes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-blue type-text size-subtitles" href="#">Consultar Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-blue type-text size-subtitles" routerLink="rutasEntrega/rutas">Generar Rutas de Entrega</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black type-text size-subtitles" href="#">Gestionar Roles y Permisos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black type-text size-subtitles" href="#">Auditar Sistema</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-8 d-flex justify-content-center align-items-center">
+        <router-outlet></router-outlet>
+      </div>
+  </div>

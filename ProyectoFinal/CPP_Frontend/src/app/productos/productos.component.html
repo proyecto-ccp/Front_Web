@@ -1,0 +1,89 @@
+
+  <div class="color-box">
+    <div class="color-box">
+      <h2 class="carga-productos">Carga de Productos</h2>
+      <div class="form-check form-check-inline color-box">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" [(ngModel)]="seleccion" checked>
+        <label class="form-check-label radioButton" for="exampleRadios1">
+          Carga Individual
+        </label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input " type="radio" name="exampleRadios" id="exampleRadios2" value="option2" [(ngModel)]="seleccion">
+        <label class="form-check-label radioButton" for="exampleRadios2">
+          Cargue Masivo
+        </label>
+      </div>
+      <div *ngIf="seleccion === 'option2'">
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="file" class="form-label">Carga Archivo (csv)</label>
+          <input class="form-control" type="file" id="file" name="file">
+        </div>
+
+        <button type="submit" class="btn btn-primary button">Cargar</button>
+      </form>
+    </div>
+      <div *ngIf="seleccion === 'option1'"> 
+        <div class="card">
+
+          <label for="basic-url" class="font">Nombre Producto</label>
+          <input type="text" class="form-control input-redondo" placeholder="Nombre Producto" aria-label="Username">
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Codigo Producto</label>
+          <input type="text" class="form-control" placeholder="Codigo Producto" aria-label="Username">
+        </div>
+
+        <div class="card">
+
+          <label for="basic-url" class="font">Descripción</label>
+          <input type="text" class="form-control" placeholder="Descripción" aria-label="Username">
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Proveedor</label>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Marca</label>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Color</label>
+          <input type="text" class="form-control" placeholder="Color" aria-label="Username">
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Modelo</label>
+          <input type="text" class="form-control" placeholder="Modelo" aria-label="Username">
+        </div>
+        <div class="card">
+          <label for="basic-url" class="font">Material</label>
+          <input type="text" class="form-control" placeholder="Material" aria-label="Username">
+        </div>
+        <div class="card">
+          <label for="basic-url" class="font">Precio Unitario</label>
+          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username">
+        </div>
+        <button type="submit" class="btn btn-primary button">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+
