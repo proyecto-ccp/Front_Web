@@ -26,19 +26,25 @@ export class ProductosComponent implements OnInit {
   productos = {
     nombre: '',
     descripcion: '',
-    proveedor: '',
-    marca: '',
-    color: '',
-    modelo: '',
-    material: '',
-    precio: '',
-    medida:'',
-    categoria:'',
+    idProveedor: '',
+    idMarca: 0,
+    idColor: 0,
+    idModelo: 0,
+    idMaterial: 0,
+    precioUnitario: 0,
+    idMedida:0,
+    idCategoria:0,
     urlFoto1: 'urlFoto1',
     urlFoto2: 'urlFoto1'
   };
+  selectedFile: File | null = null;
   constructor(private marcaService: MarcaService, private MaterialService: MaterialService,private ColorService: ColorService, private ModeloService: ModeloService, private CategoriaService: CategoriaService, private MedidaService: MedidaService, private ProductoService: ProductoService) { }
-
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
   ngOnInit() {
     this.getMaterial();
     this.getColor();
@@ -121,7 +127,9 @@ export class ProductosComponent implements OnInit {
     this.ProductoService.guardarProducto(this.productos).subscribe(
       (response) => {
         console.log('Producto guardado correctamente', response);
+        this.limpiarFormulario();
         alert('Producto guardado correctamente');
+
       },
       (error) => {
         console.error('Error al guardar el producto', error);
@@ -131,7 +139,38 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
+  limpiarFormulario(): void {
+    this.productos = {
+      nombre: '',
+    descripcion: '',
+    idProveedor: '',
+    idMarca: 0,
+    idColor: 0,
+    idModelo: 0,
+    idMaterial: 0,
+    precioUnitario: 0,
+    idMedida:0,
+    idCategoria:0,
+    urlFoto1: 'urlFoto1',
+    urlFoto2: 'urlFoto1'
+    };
 
   }
+
+  onSubmit() {
+    if (this.selectedFile) {
+    this.ProductoService.uploadFile(this.selectedFile).subscribe(
+        (response) => {
+          console.log('Archivo subido con éxito', response);
+        },
+        (error) => {
+          console.error('Error al subir el archivo', error);
+        }
+      );
+    }
+  }
+  
+}
+
 
 

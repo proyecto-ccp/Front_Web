@@ -16,10 +16,10 @@
         </label>
       </div>
       <div *ngIf="seleccion === 'option2'">
-      <form action="/upload" method="POST" enctype="multipart/form-data">
+      <form action="/upload" method="POST" enctype="multipart/form-data " (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="file" class="form-label">Carga Archivo (csv)</label>
-          <input class="form-control" type="file" id="file" name="file">
+          <input class="form-control" type="file" id="file" name="file" (change)="onFileChange($event)">
         </div>
 
         <button type="submit" class="btn btn-primary button">Cargar</button>
@@ -41,7 +41,7 @@
         <div class="card">
 
           <label for="basic-url" class="font">Proveedor</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.proveedor">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idProveedor">
             <option selected>Proveedor</option>
             <option value="550e8400-e29b-41d4-a716-446655440000">One</option>
             <option value="550e8400-e29b-41d4-a716-446655440000">Two</option>
@@ -51,47 +51,47 @@
         <div class="card">
 
           <label for="basic-url" class="font">Marca</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.marca">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMarca">
             <option *ngFor="let marcas of marcas" [value]="marcas.id">{{ marcas.nombre }}</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Color</label>
-          <select class="form-select" aria-label="Default select example"  [(ngModel)]="productos.color">
+          <select class="form-select" aria-label="Default select example"  [(ngModel)]="productos.idColor">
             <option *ngFor="let color of color" [value]="color.id">{{ color.nombre }}</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Modelo</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.modelo" >
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idModelo" >
             <option *ngFor="let modelo of modelo" [value]="modelo.id">{{ modelo.nombre }}</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Categorías</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.categoria" >
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idCategoria" >
             <option *ngFor="let categoria of categoria" [value]="categoria.id">{{ categoria.nombre }}</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Medidas</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.medida">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMedida">
             <option *ngFor="let medida of medida" [value]="medida.id">{{ medida.nombre }}</option>
           </select>
         </div>
         <div class="card">
           <label for="basic-url" class="font">Material</label>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.material">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMaterial">
             <option *ngFor="let material of material" [value]="material.id">{{ material.nombre }}</option>
           </select>
         </div>
         <div class="card">
           <label for="basic-url" class="font">Precio Unitario</label>
-          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="productos.precio">
+          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="productos.precioUnitario">
         </div>
         <button type="submit" class="btn btn-primary button" (click)="Guardar()">Guardar</button>
       </div>
