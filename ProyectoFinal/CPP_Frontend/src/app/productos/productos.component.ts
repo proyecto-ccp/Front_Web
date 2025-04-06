@@ -6,25 +6,20 @@ import { MarcaService } from '../Marcas/marca.service';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']
 })
+
+
 export class ProductosComponent implements OnInit {
   seleccion: string = '';
   marcas: any[] = []; 
   constructor(private marcaService: MarcaService) { }
 
   ngOnInit() {
-    this.marcaService.getMarcas().subscribe(
-      (data) => {
-        // Si 'data' es un objeto y quieres obtener un array con 'key' y 'value'
-        if (Array.isArray(data)) {
-          // Si 'data' es un array, asignarlo directamente
-          this.marcas = data;
-        } else {
-          // Si 'data' es un objeto, convertirlo a un array de objetos con 'key' y 'value'
-          this.marcas = Object.keys(data).map(key => {
-            return { key: key, value: data[key] };
-          });
-        }
-      },
+    
+      this.marcaService.getMarcas().subscribe(
+        (data) => {
+          this.marcas = data.marcas;  // Asignar los datos al array marcas
+          console.log(this.marcas);  // Verifica que los datos se asignan correctamente
+        },
       (error) => {
         console.error('Error al obtener las marcas', error);
       }
