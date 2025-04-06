@@ -11,13 +11,17 @@ import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
 import { PrincipalMenuComponent } from './principalMenu/principalMenu.component';
 import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
+import { MarcaService } from './Marcas/marca.service';
+import { MarcasComponent } from './Marcas/Marcas.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [	
     AppComponent,
     ProductosComponent,
     PrincipalMenuComponent,
-    RutasComponent
+    RutasComponent, 
+    MarcasComponent
    ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
     MatIconModule,
     MatListModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
     
   ],
   providers: [],
