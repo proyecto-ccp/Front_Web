@@ -29,55 +29,71 @@
         <div class="card">
 
           <label for="basic-url" class="font">Nombre Producto</label>
-          <input type="text" class="form-control input-redondo" placeholder="Nombre Producto" aria-label="Username">
+          <input type="text" class="form-control input-redondo" placeholder="Nombre Producto" aria-label="Username" [(ngModel)]="productos.nombre">
         </div>
-        <div class="card">
-
-          <label for="basic-url" class="font">Codigo Producto</label>
-          <input type="text" class="form-control" placeholder="Codigo Producto" aria-label="Username">
-        </div>
+       
 
         <div class="card">
 
           <label for="basic-url" class="font">Descripción</label>
-          <input type="text" class="form-control" placeholder="Descripción" aria-label="Username">
+          <input type="text" class="form-control" placeholder="Descripción" aria-label="Username" [(ngModel)]="productos.descripcion">
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Proveedor</label>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.proveedor">
+            <option selected>Proveedor</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">One</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">Two</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">Three</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Marca</label>
-          <select class="form-select" aria-label="Default select example" >
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.marca">
             <option *ngFor="let marcas of marcas" [value]="marcas.id">{{ marcas.nombre }}</option>
           </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Color</label>
-          <input type="text" class="form-control" placeholder="Color" aria-label="Username">
+          <select class="form-select" aria-label="Default select example"  [(ngModel)]="productos.color">
+            <option *ngFor="let color of color" [value]="color.id">{{ color.nombre }}</option>
+          </select>
         </div>
         <div class="card">
 
           <label for="basic-url" class="font">Modelo</label>
-          <input type="text" class="form-control" placeholder="Modelo" aria-label="Username">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.modelo" >
+            <option *ngFor="let modelo of modelo" [value]="modelo.id">{{ modelo.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Categorías</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.categoria" >
+            <option *ngFor="let categoria of categoria" [value]="categoria.id">{{ categoria.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Medidas</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.medida">
+            <option *ngFor="let medida of medida" [value]="medida.id">{{ medida.nombre }}</option>
+          </select>
         </div>
         <div class="card">
           <label for="basic-url" class="font">Material</label>
-          <input type="text" class="form-control" placeholder="Material" aria-label="Username">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.material">
+            <option *ngFor="let material of material" [value]="material.id">{{ material.nombre }}</option>
+          </select>
         </div>
         <div class="card">
           <label for="basic-url" class="font">Precio Unitario</label>
-          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username">
+          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="productos.precio">
         </div>
-        <button type="submit" class="btn btn-primary button">Guardar</button>
+        <button type="submit" class="btn btn-primary button" (click)="Guardar()">Guardar</button>
       </div>
     </div>
   </div>
