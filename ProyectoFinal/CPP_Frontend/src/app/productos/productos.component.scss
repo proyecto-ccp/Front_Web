@@ -1,0 +1,82 @@
+// Subtitulos
+:host ::ng-deep {
+    &.text-red {
+        color: #CF735B;
+    }
+
+    &.text-blue {
+        color: #79BBDA;
+    }
+    &.text-black {
+        color: #000000;
+    }
+    &.size-ul {
+        width: max-content;
+    }
+    &.size-subtitles {
+        font-weight: 800;
+        font-size: 25px;
+    }
+    &.type-text {
+        font-family: 'Nunito Sans', sans-serif;
+    }
+
+    &.color-box{
+        background-color: #F3F2F5;
+    }
+
+}
+
+// Logo
+:host ::ng-deep {
+    &.logo {
+        width: 300px;
+        height: 240px;
+    }
+    &.logo-height {
+        height: 183px;
+    }
+}
+
+.h3,
+h3 {
+    font-size: 4.75rem;
+}
+.h2{
+    color: #C92243;
+}
+
+#type-text {
+    font-family: 'Nunito Sans', sans-serif;
+    
+}
+
+.carga-productos {
+    color: #C92243;
+    text-align: left;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 32px;
+  }
+.radioButton{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 32px;
+}
+
+.input-redondo {
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+
+  }
+.font{
+    color: #C92243;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+.button{
+    background-color: #C92243;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+    width: 267.91px;
+    height: 36.01px;
+    align-items: center;
+}

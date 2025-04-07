@@ -1,0 +1,102 @@
+
+  <div class="color-box">
+    <div class="color-box">
+      <h2 class="carga-productos">Carga de Productos</h2>
+      <div class="form-check form-check-inline color-box">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" [(ngModel)]="seleccion" checked>
+        <label class="form-check-label radioButton" for="exampleRadios1">
+          Carga Individual
+        </label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input " type="radio" name="exampleRadios" id="exampleRadios2" value="option2" [(ngModel)]="seleccion">
+        <label class="form-check-label radioButton" for="exampleRadios2">
+          Cargue Masivo
+        </label>
+      </div>
+      <div *ngIf="seleccion === 'option2'">
+      <form action="/upload" method="POST" enctype="multipart/form-data " (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="file" class="form-label">Carga Archivo (csv)</label>
+          <input class="form-control" type="file" id="file" name="file" (change)="onFileChange($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary button">Cargar</button>
+      </form>
+    </div>
+      <div *ngIf="seleccion === 'option1'"> 
+        <div class="card">
+
+          <label for="basic-url" class="font">Nombre Producto</label>
+          <input type="text" class="form-control input-redondo" placeholder="Nombre Producto" aria-label="Username" [(ngModel)]="productos.nombre">
+        </div>
+       
+
+        <div class="card">
+
+          <label for="basic-url" class="font">Descripción</label>
+          <input type="text" class="form-control" placeholder="Descripción" aria-label="Username" [(ngModel)]="productos.descripcion">
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Proveedor</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idProveedor">
+            <option selected>Proveedor</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">One</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">Two</option>
+            <option value="550e8400-e29b-41d4-a716-446655440000">Three</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Marca</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMarca">
+            <option *ngFor="let marcas of marcas" [value]="marcas.id">{{ marcas.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Color</label>
+          <select class="form-select" aria-label="Default select example"  [(ngModel)]="productos.idColor">
+            <option *ngFor="let color of color" [value]="color.id">{{ color.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Modelo</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idModelo" >
+            <option *ngFor="let modelo of modelo" [value]="modelo.id">{{ modelo.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Categorías</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idCategoria" >
+            <option *ngFor="let categoria of categoria" [value]="categoria.id">{{ categoria.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+
+          <label for="basic-url" class="font">Medidas</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMedida">
+            <option *ngFor="let medida of medida" [value]="medida.id">{{ medida.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+          <label for="basic-url" class="font">Material</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="productos.idMaterial">
+            <option *ngFor="let material of material" [value]="material.id">{{ material.nombre }}</option>
+          </select>
+        </div>
+        <div class="card">
+          <label for="basic-url" class="font">Precio Unitario</label>
+          <input type="text" class="form-control" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="productos.precioUnitario">
+        </div>
+        <button type="submit" class="btn btn-primary button" (click)="Guardar()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+
