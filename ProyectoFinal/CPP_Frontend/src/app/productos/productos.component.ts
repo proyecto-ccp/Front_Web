@@ -162,9 +162,12 @@ export class ProductosComponent implements OnInit {
     this.ProductoService.uploadFile(this.selectedFile).subscribe(
         (response) => {
           console.log('Archivo subido con éxito', response);
+          alert('Productos guardados correctamente');
+          this.selectedFile=null;
         },
         (error) => {
           console.error('Error al subir el archivo', error);
+          alert('Error al subir el archivo');
         }
       );
     }

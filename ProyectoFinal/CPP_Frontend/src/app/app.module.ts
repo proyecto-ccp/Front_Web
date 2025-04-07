@@ -15,6 +15,7 @@ import { MarcaService } from './Marcas/marca.service';
 import { MarcasComponent } from './Marcas/Marcas.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [	
     AppComponent,
@@ -32,7 +33,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatListModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    
     
   ],
   providers: [],
