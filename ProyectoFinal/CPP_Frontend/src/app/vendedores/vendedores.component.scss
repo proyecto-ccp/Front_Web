@@ -27,7 +27,7 @@
 
 }
 
-// Logo
+
 :host ::ng-deep {
     &.logo {
         width: 300px;
@@ -79,4 +79,27 @@ h3 {
     width: 267.91px;
     height: 36.01px;
     align-items: center;
+}
+.color-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  %space-input {
+    padding-left: 85px;
+}
+
+.input-design {
+    @extend %size-input;
+}
+
+.space-left-input {
+    @extend %space-input;
+}
+%size-input {
+    width: 416.52px;
+    height: 56.45px;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
 }

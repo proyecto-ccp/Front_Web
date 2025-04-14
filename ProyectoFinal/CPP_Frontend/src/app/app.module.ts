@@ -14,6 +14,7 @@ import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
 import { MarcaService } from './Marcas/marca.service';
 import { MarcasComponent } from './Marcas/Marcas.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { VendedoresComponent } from './vendedores/vendedores.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ProductosComponent,
     PrincipalMenuComponent,
     RutasComponent, 
-    MarcasComponent
+    MarcasComponent,
+    VendedoresComponent
    ],
   imports: [
     BrowserModule,
