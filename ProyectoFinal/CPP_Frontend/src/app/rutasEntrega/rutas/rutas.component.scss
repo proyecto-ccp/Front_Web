@@ -1,11 +1,11 @@
-// Subtitulos
+
 :host ::ng-deep {
     &.text-red {
         color: #CF735B;
     }
 
     &.text-blue {
-        color: #79BBDA;
+        color: #B0C5D6;
     }
     &.text-black {
         color: #000000;
@@ -27,7 +27,7 @@
 
 }
 
-// Logo
+
 :host ::ng-deep {
     &.logo {
         width: 300px;
@@ -43,7 +43,7 @@ h3 {
     font-size: 4.75rem;
 }
 .h2{
-    color: #C92243;
+    color: #B0C5D6;
 }
 
 #type-text {
@@ -52,7 +52,7 @@ h3 {
 }
 
 .carga-productos {
-    color: #C92243;
+    color: #B0C5D6;
     text-align: left;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 32px;
@@ -62,28 +62,31 @@ h3 {
     font-size: 32px;
 }
 
+.input-redondo {
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+
+  }
 .font{
-    color: #C92243;
+    color: #B0C5D6;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 14px;
 }
 .button{
-    background-color: #C92243;
+    background-color: #B0C5D6;
     border-radius: 20px;
     padding: 10px; /* Ajusta el padding si es necesario */
     width: 267.91px;
     height: 36.01px;
     align-items: center;
 }
-
-%size-input {
-    width: 416.52px;
-    height: 36.45px;
-    border-radius: 20px;
-    padding: 10px; /* Ajusta el padding si es necesario */
-}
-
-%space-input {
+.color-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  %space-input {
     padding-left: 85px;
 }
 
@@ -94,10 +97,9 @@ h3 {
 .space-left-input {
     @extend %space-input;
 }
-.label{
-    padding-left: 116px;
+%size-input {
+    width: 416.52px;
+    height: 56.45px;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
 }
-.labelNom{
-    padding-left: 89px;
-}
-

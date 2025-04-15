@@ -1,4 +1,3 @@
-// Subtitulos
 :host ::ng-deep {
     &.text-red {
         color: #CF735B;
@@ -27,7 +26,7 @@
 
 }
 
-// Logo
+
 :host ::ng-deep {
     &.logo {
         width: 300px;
@@ -62,6 +61,11 @@ h3 {
     font-size: 32px;
 }
 
+.input-redondo {
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+
+  }
 .font{
     color: #C92243;
     font-family: 'Nunito Sans', sans-serif;
@@ -75,15 +79,19 @@ h3 {
     height: 36.01px;
     align-items: center;
 }
-
-%size-input {
-    width: 416.52px;
-    height: 36.45px;
-    border-radius: 20px;
-    padding: 10px; /* Ajusta el padding si es necesario */
-}
-
-%space-input {
+.color-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .color-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  %space-input {
     padding-left: 85px;
 }
 
@@ -94,10 +102,9 @@ h3 {
 .space-left-input {
     @extend %space-input;
 }
-.label{
-    padding-left: 116px;
+%size-input {
+    width: 416.52px;
+    height: 46.45px;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
 }
-.labelNom{
-    padding-left: 89px;
-}
-

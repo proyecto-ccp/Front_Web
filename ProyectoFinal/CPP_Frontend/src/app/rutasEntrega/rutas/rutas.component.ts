@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-rutas',
   templateUrl: './rutas.component.html',
-  styleUrls: ['./rutas.component.css']
+  styleUrls: ['./rutas.component.scss']
 })
 export class RutasComponent {
 
   // Aquí puedes definir las propiedades del formulario, si es necesario
   // Ejemplo: model para el formulario
   model = {
+    idpedido: '',
     direccionDestino: '',
     direccionOrigen: '',
     tipoEntrega: '',
