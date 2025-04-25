@@ -2,36 +2,49 @@
   <div class="color-box">
     <h2 class="carga-productos">Registro de Fabricantes</h2>
   </div>
-    <div > <div >
+  <div class="div-central">
+    <div>
 
-  <label for="basic-url" class="font">Nombre o Razón Social</label>
-  <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username" >
-</div>
-<div >
-  <label for="basic-url" class="font">Tipo Documento</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" >
-</div>
-<div >
-  <label for="basic-url" class="font">Número de Documento</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" >
-</div>
-<div >
-  <label for="basic-url" class="font">Telefono</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username">
-</div>
-<div >
-  <label for="basic-url" class="font">mail</label>
-  <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" >
-</div>
-<div >
-  <label for="basic-url" class="font">Dirección</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" >
-</div>
-<div >
-  <label for="basic-url" class="font">Producto</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" >
-</div>
+      <label for="basic-url" class="font">Nombre o Razón Social</label>
+      <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username"  [(ngModel)]="fabricantes.nombre">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Tipo Documento</label>
+      <select class="form-select input-design"
+        [(ngModel)]="fabricantes.idTipoDocumento"
+        name="idTipoDocumento">
+  <option *ngFor="let tipoDocumento of tipoDocumento" [value]="tipoDocumento.id">
+    {{ tipoDocumento.codigo }}
+  </option>
+</select>
+    </div>
+    <div>
+      <label for="basic-url" class="font">Número de Documento</label>
+      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.numeroDocumento">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Telefono</label>
+      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.telefono">
+    </div>
+    <div>
+      <label for="basic-url" class="font">mail</label>
+      <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" [(ngModel)]="fabricantes.correo">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Dirección</label>
+      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.direccion">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Ciudad</label>
+      <select class="form-select input-design"
+        [(ngModel)]="fabricantes.idCiudad"
+        name="idCiudad">
+  <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+    {{ ciudad.nombre }}
+  </option>
+</select>
+    </div>
 
-<button type="submit" class="btn btn-primary button" (click)="Guardar()">Registrar</button>
-</div>
+    <button type="submit" class="btn btn-primary button" (click)="Guardar()">Registrar</button>
+  </div>
 </div>

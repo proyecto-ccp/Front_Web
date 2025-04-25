@@ -1,3 +1,36 @@
-<p>
-  PlanesVenta works!
-</p>
+<div class="color-box">
+  <div class="color-box">
+    <h2 class="carga-productos">Crear Plan de Venta</h2>
+  </div>
+  <div>
+    <div>
+
+      <label for="basic-url" class="font">Nombre</label>
+      <input type="text" class="form-control input-design" placeholder="Nombre" aria-label="Username"
+        [(ngModel)]="planVenta.nombre">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Fecha Inicio</label>
+      <mat-form-field  >
+        <input  matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [(ngModel)]="planVenta.fechaInicio" >
+        <mat-datepicker-toggle   matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <label for="basic-url" class="font">Fecha Fin</label>
+      <mat-form-field  >
+        <input  matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [(ngModel)]="planVenta.fechaFin">
+        <mat-datepicker-toggle   matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field>
+     
+    </div>
+    
+    
+      <!-- Botón centrado debajo -->
+      <button type="submit" class="btn btn-primary button" (click)="guardarPlanVenta()">
+        Registrar
+      </button>
+    </div>
+  </div>

@@ -25,6 +25,13 @@ uploadFile(file: File): Observable<any> {
     headers, // Puedes agregar headers si es necesario
   });
 }
+ 
+  obtenerProductos(): Observable<any> {
+    this.apiUrl='https://productos-596275467600.us-central1.run.app/api/Productos/Consultar'
+    return this.http.get(this.apiUrl);
+  }
+ 
 }
+
 
 
