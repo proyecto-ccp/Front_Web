@@ -2,41 +2,55 @@
   <div class="color-box">
     <h2 class="carga-productos">Registro de Vendedores</h2>
   </div>
-    <div > <div >
+  <div>
+    <div>
 
-  <label for="basic-url" class="font">Nombre</label>
-  <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username" [(ngModel)]="vendedor.nombre" >
-</div>
-<div >
-  <label for="basic-url" class="font">Apellido</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="vendedor.apellido" >
-</div>
-<div >
-  <label for="basic-url" class="font">Tipo de Documento</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="vendedor.idtipoDocumento" >
-</div>
-<div >
-  <label for="basic-url" class="font">Número de Documento</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="vendedor.idtipoDocumento">
-</div>
-<div >
-  <label for="basic-url" class="font">mail</label>
-  <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="vendedor.mail">
-</div>
-<div >
-  <label for="basic-url" class="font">telefono</label>
-  <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" [(ngModel)]="vendedor.telefono"> 
-</div>
-<div >
-  <label for="basic-url" class="font">telefono</label>
-  <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" [(ngModel)]="vendedor.fechaRegistro"> 
-</div>
-<div >
-  <label for="basic-url" class="font">telefono</label>
-  <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" [(ngModel)]="vendedor.fechaActualizacion"> 
-</div>
-
-<button type="submit" class="btn btn-primary button" (click)="Guardar()">Registrar</button>
-</div>
-</div>
-
+      <label for="basic-url" class="font">Nombre</label>
+      <input type="text" class="form-control input-design" placeholder="Nombre" aria-label="Username"
+        [(ngModel)]="vendedor.nombre">
+    </div>
+    <div>
+      <label for="basic-url" class="font">Apellido</label>
+      <input type="text" class="form-control input-design" placeholder="Apellido" aria-label="Username"
+        [(ngModel)]="vendedor.apellido">
+    </div>
+   
+    <div>
+      <label for="basic-url" class="font">Tipo Documento</label>
+      <select class="form-select input-design"
+        [(ngModel)]="vendedor.idTipoDocumento"
+        name="idTipoDocumento">
+  <option *ngFor="let tipoDocumento of tipoDocumento" [value]="tipoDocumento.id">
+    {{ tipoDocumento.codigo }}
+  </option>
+</select>
+    </div>
+    <div>
+      <label for="basic-url" class="font">Número de Documento</label>
+      <input type="text" class="form-control input-design" placeholder="Número de Documento" aria-label="Username"
+        [(ngModel)]="vendedor.numeroDocumento">
+    </div>
+    <div>
+      <label for="basic-url" class="font">correo</label>
+      <input type="text" class="form-control input-design" placeholder="correo" aria-label="Username"
+        [(ngModel)]="vendedor.correo">
+    </div>
+    <div>
+      <label for="basic-url" class="font">telefono</label>
+      <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username"
+        [(ngModel)]="vendedor.telefono">
+        
+    </div>
+    <div>
+      <label for="basic-url" class="font">Dirección</label>
+      <input type="text" class="form-control input-design" placeholder="Dirección" aria-label="Username"
+        [(ngModel)]="vendedor.direccion">
+        
+    </div>
+    
+      <!-- Botón centrado debajo -->
+      <button type="submit" class="btn btn-primary button" (click)="Guardar()">
+        Registrar
+      </button>
+    </div>
+  </div>

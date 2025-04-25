@@ -58,10 +58,7 @@
             <div class="d-flex justify-content-center">
               <select class="form-select input-design" aria-label="Default select example"
                 [(ngModel)]="productos.idProveedor">
-                <option selected>Proveedor</option>
-                <option value="550e8400-e29b-41d4-a716-446655440000">One</option>
-                <option value="550e8400-e29b-41d4-a716-446655440000">Two</option>
-                <option value="550e8400-e29b-41d4-a716-446655440000">Three</option>
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
               </select>
             </div>
           </div>
@@ -147,6 +144,16 @@
             <div class="d-flex justify-content-center">
               <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
                 [(ngModel)]="productos.precioUnitario">
+            </div>
+          </div>
+
+          <div>
+            <div class="space-left-input">
+              <label for="basic-url" class="font label">Cantidad</label>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
+                [(ngModel)]="productos.cantidad">
             </div>
           </div>
   

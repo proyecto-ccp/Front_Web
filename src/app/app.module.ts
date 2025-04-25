@@ -15,6 +15,22 @@ import { MarcaService } from './Marcas/marca.service';
 import { MarcasComponent } from './Marcas/Marcas.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { VendedoresComponent } from './vendedores/vendedores.component';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuditarComponent } from './auditar/auditar.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; 
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FabricantesComponent } from './fabricantes/fabricantes.component';
+import { CiudadComponent } from './ciudad/ciudad.component';
+import { ConsultarProductosComponent } from './productos/consultarProductos/consultarProductos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PlanesVentaComponent } from './PlanesVenta/PlanesVenta.component';
+import { TDocumentoComponent } from './TDocumento/TDocumento.component';
+
 
 
 @NgModule({
@@ -24,7 +40,13 @@ import { VendedoresComponent } from './vendedores/vendedores.component';
     PrincipalMenuComponent,
     RutasComponent, 
     MarcasComponent,
-    VendedoresComponent
+    VendedoresComponent,
+    AuditarComponent,
+    FabricantesComponent,
+    CiudadComponent,
+    ConsultarProductosComponent,
+    PlanesVentaComponent,
+    TDocumentoComponent
    ],
   imports: [
     BrowserModule,
@@ -36,8 +58,18 @@ import { VendedoresComponent } from './vendedores/vendedores.component';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    BrowserAnimationsModule, // required animations module
-    
+    BrowserAnimationsModule,
+    NgbDatepickerModule,
+    FormsModule,
+    NgbModule, // required animations module
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    NgxPaginationModule
     
   ],
   providers: [],

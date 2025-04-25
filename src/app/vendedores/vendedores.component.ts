@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { vendedorService } from './vendedores.service';
+import { TDocumentoService } from '../TDocumento/TDocumento.service';
+
 
 @Component({
   selector: 'app-vendedores',
@@ -8,26 +10,31 @@ import { vendedorService } from './vendedores.service';
 })
 export class VendedoresComponent implements OnInit {
   seleccion: string = '';
-  tipoDocumento: any[] = []; 
+  tipoDocumento: any[] = [];
+
   
   vendedor = {
     nombre: '',
     apellido: '',
-    idtipoDocumento: '',
-    NDocumento: 0,
-    mail: 0,
+    idTipoDocumento: 0,
+    numeroDocumento: '',
+    correo: '',
     telefono: '',
-    fechaRegistro:'',
-    fechaActualizacion:''
+    direccion: '',
+   
     
   };
-  constructor(private vendedorService: vendedorService) { }
+  constructor(private vendedorService: vendedorService, private TDocumentoService: TDocumentoService) { }
 
   ngOnInit() {
+    this.getTDocumento();
+    
   }
 
   Guardar(){
     // Llamar al servicio para guardar el producto
+    console.log(this.vendedor);
+    this.vendedor.idTipoDocumento = Number(this.vendedor.idTipoDocumento);
     this.vendedorService.guardarVendedores(this.vendedor).subscribe(
       (response) => {
         console.log('Vendedor guardado correctamente', response);
@@ -47,16 +54,29 @@ export class VendedoresComponent implements OnInit {
     this.vendedor = {
       nombre: '',
     apellido: '',
-    idtipoDocumento: '',
-    NDocumento: 0,
-    mail: 0,
+    idTipoDocumento: 0,
+    numeroDocumento: '',
+    
+    correo: '',
     telefono: '',
-    fechaRegistro:'',
-    fechaActualizacion:''
+    direccion: '',
+    
     
      
     };
 
+  }
+
+  getTDocumento(){
+    this.TDocumentoService.getTDcoumento().subscribe(
+      (data) => {
+        this.tipoDocumento = data.documentos;
+        console.log(this.tipoDocumento)
+      },
+      (error) => {
+        console.error('Error al obtener las ciudades', error);
+      }
+    );
   }
     
   
