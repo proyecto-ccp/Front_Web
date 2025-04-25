@@ -8,7 +8,7 @@ import { TDocumentoService } from './TDocumento.service';
 })
 export class TDocumentoComponent implements OnInit {
   tDocumento: any[] = [];
-  constructor(private TDcoumentoService: TDocumentoService) { }
+  constructor(private readonly  TDcoumentoService: TDocumentoService) { }
 
   ngOnInit() {
     this.TDcoumentoService.getTDcoumento().subscribe((data) => {

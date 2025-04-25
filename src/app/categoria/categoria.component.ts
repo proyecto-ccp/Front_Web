@@ -8,7 +8,7 @@ import {CategoriaService} from './categoria.service'
 })
 export class CategoriaComponent implements OnInit {
   categoria: any[] = [];
-  constructor(private categoriaService: CategoriaService) { }
+  constructor(private readonly  categoriaService: CategoriaService) { }
 
   ngOnInit() {
     this.categoriaService.getCategoria().subscribe((data) => {

@@ -9,7 +9,7 @@ import { ColorService } from './color.service';
 export class ColorComponent implements OnInit {
   color: any[] = [];
 
-  constructor(private colorService: ColorService) {}
+  constructor(private readonly  colorService: ColorService) {}
 
   ngOnInit() { // Llamamos al servicio para obtener las marcas cuando el componente se inicializa
   this.colorService.getColor().subscribe((data) => {

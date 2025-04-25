@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ProductoService {
   private apiUrl = 'https://productos-596275467600.us-central1.run.app/api/Productos/Crear';
 
-constructor(private http: HttpClient) { }
+constructor(private readonly http: HttpClient) { }
 guardarProducto(producto: any): Observable<any> {
   return this.http.post<any>(this.apiUrl, producto);
 }

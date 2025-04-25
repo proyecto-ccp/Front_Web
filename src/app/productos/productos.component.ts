@@ -40,7 +40,7 @@ export class ProductosComponent implements OnInit {
     cantidad: 0
   };
   selectedFile: File | null = null;
-  constructor(private marcaService: MarcaService, private MaterialService: MaterialService,private ColorService: ColorService, private ModeloService: ModeloService, private CategoriaService: CategoriaService, private MedidaService: MedidaService, private ProductoService: ProductoService, private FabricanteServive: FabricantesService) { }
+  constructor(private readonly marcaService: MarcaService, private readonly MaterialService: MaterialService,private readonly ColorService: ColorService, private readonly ModeloService: ModeloService, private readonly CategoriaService: CategoriaService, private readonly MedidaService: MedidaService, private readonly ProductoService: ProductoService, private readonly FabricanteServive: FabricantesService) { }
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {

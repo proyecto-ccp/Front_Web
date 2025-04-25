@@ -8,7 +8,7 @@ import { CiudadService } from './ciudad.service';
 })
 export class CiudadComponent implements OnInit {
   ciudad: any[] = [];
-  constructor(private ciudadService: CiudadService) { }
+  constructor(private readonly  ciudadService: CiudadService) { }
 
   ngOnInit() {
     this.ciudadService.getCiudad().subscribe((data) => {

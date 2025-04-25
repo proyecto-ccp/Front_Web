@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class vendedorService {
  
-  private apiUrl = 'https://vendedor-596275467600.us-central1.run.app/api/Vendedor/Crear';
+  private readonly apiUrl = 'https://vendedor-596275467600.us-central1.run.app/api/Vendedor/Crear';
 constructor(private http: HttpClient) { 
 
 }
