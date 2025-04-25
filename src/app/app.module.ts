@@ -9,9 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
-import { PrincipalMenuComponent } from './principalMenu/principalMenu.component';
 import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
-
 import { MarcasComponent } from './Marcas/Marcas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VendedoresComponent } from './vendedores/vendedores.component';
@@ -37,7 +35,6 @@ import { TDocumentoComponent } from './TDocumento/TDocumento.component';
   declarations: [	
     AppComponent,
     ProductosComponent,
-    PrincipalMenuComponent,
     RutasComponent, 
     MarcasComponent,
     VendedoresComponent,
@@ -46,7 +43,8 @@ import { TDocumentoComponent } from './TDocumento/TDocumento.component';
     CiudadComponent,
     ConsultarProductosComponent,
     PlanesVentaComponent,
-    TDocumentoComponent
+    TDocumentoComponent,
+    
    ],
   imports: [
     BrowserModule,
@@ -69,7 +67,8 @@ import { TDocumentoComponent } from './TDocumento/TDocumento.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+  
     
   ],
   providers: [],

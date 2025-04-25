@@ -1,16 +1,19 @@
-/* tslint:disable:no-unused-variable */
-
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ColorService } from './color.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // 👈 Importar esto
 
-describe('Service: Color', () => {
+describe('ColorService', () => {
+  let service: ColorService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule], // 👈 Agregar esto
       providers: [ColorService]
     });
+    service = TestBed.inject(ColorService);
   });
 
-  it('should ...', inject([ColorService], (service: ColorService) => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  }));
+  });
 });
