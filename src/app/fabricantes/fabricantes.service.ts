@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FabricantesService {
-  private apiUrl = 'https://proveedores-596275467600.us-central1.run.app/api/Proveedores/Crear' 
+  private  apiUrl = 'https://proveedores-596275467600.us-central1.run.app/api/Proveedores/Crear' 
 
-constructor(private http: HttpClient) { }
+constructor(private readonly  http: HttpClient) { }
 guardarProveedores(proveedor: any): Observable<any> {
   return this.http.post<any>(this.apiUrl, proveedor);
 }
