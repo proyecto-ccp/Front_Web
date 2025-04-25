@@ -7,6 +7,7 @@ import {ModeloService} from '../modelo/modelo.service'
 import {CategoriaService} from '../categoria/categoria.service'
 import { MedidaService } from '../medida/medida.service';
 import { ProductoService } from './producto.service';
+import { FabricantesService } from '../fabricantes/fabricantes.service';
 
 @Component({
   selector: 'app-productos',
@@ -23,6 +24,7 @@ export class ProductosComponent implements OnInit {
   modelo: any[] = [];
   categoria: any[]=[];
   medida: any[]=[];
+  proveedores: any[]=[];
   productos = {
     nombre: '',
     descripcion: '',
@@ -35,10 +37,11 @@ export class ProductosComponent implements OnInit {
     idMedida:0,
     idCategoria:0,
     urlFoto1: 'urlFoto1',
-    urlFoto2: 'urlFoto1'
+    urlFoto2: 'urlFoto1',
+    cantidad: 0
   };
   selectedFile: File | null = null;
-  constructor(private marcaService: MarcaService, private MaterialService: MaterialService,private ColorService: ColorService, private ModeloService: ModeloService, private CategoriaService: CategoriaService, private MedidaService: MedidaService, private ProductoService: ProductoService) { }
+  constructor(private marcaService: MarcaService, private MaterialService: MaterialService,private ColorService: ColorService, private ModeloService: ModeloService, private CategoriaService: CategoriaService, private MedidaService: MedidaService, private ProductoService: ProductoService, private FabricanteServive: FabricantesService) { }
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -51,6 +54,7 @@ export class ProductosComponent implements OnInit {
     this.getModelo();
     this.getCategoria();
     this.getMedida();
+    this.getProveedores();
       this.marcaService.getMarcas().subscribe(
         (data) => {
           this.marcas = data.marcas;  // Asignar los datos al array marcas
@@ -152,7 +156,8 @@ export class ProductosComponent implements OnInit {
     idMedida:0,
     idCategoria:0,
     urlFoto1: 'urlFoto1',
-    urlFoto2: 'urlFoto1'
+    urlFoto2: 'urlFoto1',
+    cantidad: 0
     };
 
   }
@@ -171,6 +176,30 @@ export class ProductosComponent implements OnInit {
         }
       );
     }
+  }
+
+  obtenerProductos(){
+    this.ProductoService.obtenerProductos().subscribe(
+      data => {
+        this.productos = data;
+      },
+      error => {
+        console.error('Error al obtener los productos:', error);
+      }
+    );
+  }
+
+  getProveedores(){
+    this.FabricanteServive.getProveedores().subscribe(
+      (data) => {
+        this.proveedores = data.proveedores;  // Asignar los datos al array marcas
+        console.log(this.proveedores);  // Verifica que los datos se asignan correctamente
+      },
+    (error) => {
+      console.error('Error al obtener los categoria', error);
+    }
+  );
+
   }
   
 }
