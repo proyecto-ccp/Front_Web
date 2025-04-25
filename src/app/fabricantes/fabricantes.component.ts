@@ -23,7 +23,7 @@ export class FabricantesComponent implements OnInit {
   tipoDocumento: any[]=[];
  
 
-  constructor(private fabricantesService: FabricantesService, private ciudadService : CiudadService, private TDocumentoService: TDocumentoService) { }
+  constructor(private readonly fabricantesService: FabricantesService, private readonly ciudadService : CiudadService, private readonly TDocumentoService: TDocumentoService) { }
 
   ngOnInit() {
     this.getCiudades();

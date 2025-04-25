@@ -24,7 +24,7 @@ export class VendedoresComponent implements OnInit {
    
     
   };
-  constructor(private vendedorService: vendedorService, private TDocumentoService: TDocumentoService) { }
+  constructor(private readonly vendedorService: vendedorService, private readonly TDocumentoService: TDocumentoService) { }
 
   ngOnInit() {
     this.getTDocumento();

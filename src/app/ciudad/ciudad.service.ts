@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CiudadService {
-  private apiUrl = 'https://proveedores-596275467600.us-central1.run.app/api/Ciudades/ListarCiudades';
+  private readonly apiUrl = 'https://proveedores-596275467600.us-central1.run.app/api/Ciudades/ListarCiudades';
 
-constructor(private http: HttpClient) { }
+constructor(private  readonly http: HttpClient) { }
 getCiudad(): Observable<any> {
   return this.http.get<any>(this.apiUrl);
 }
