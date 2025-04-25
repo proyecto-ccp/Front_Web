@@ -11,9 +11,9 @@ import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
 import { PrincipalMenuComponent } from './principalMenu/principalMenu.component';
 import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
-import { MarcaService } from './Marcas/marca.service';
+
 import { MarcasComponent } from './Marcas/Marcas.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditarComponent } from './auditar/auditar.component';
