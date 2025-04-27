@@ -1,4 +1,5 @@
 name: SonarQube
+
 on:
   push:
     branches:
@@ -8,23 +9,25 @@ on:
 jobs:
   sonarqube:
     name: SonarQube
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Utiliza Ubuntu más reciente para las máquinas virtuales
+
     steps:
+      # Paso 1: Checkout del código
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Asegúrate de obtener todo el historial de commits
 
+      # Paso 2: Instalar dependencias de sistema necesarias para ejecutar Chrome en headless
       - name: Install dependencies
         run: |
-          npm install
           sudo apt-get update
           sudo apt-get install -y \
+            libasound2 \
             libx11-xcb1 \
             libglib2.0-0 \
             libnss3 \
             libgdk-pixbuf2.0-0 \
             libxss1 \
-            libasound2 \
             fonts-liberation \
             libappindicator3-1 \
             libatk-bridge2.0-0 \
@@ -33,21 +36,26 @@ jobs:
             libxrandr2 \
             libxcomposite1 \
             libxdamage1 \
-            libgdk-pixbuf2.0-0 \
             libgtk-3-0 \
-            google-chrome-stable \
-            xvfb  # Asegúrate de instalar Xvfb
+            xvfb  # Asegúrate de que Xvfb esté disponible
+          npm install  # Instalar dependencias de Node.js necesarias
 
+      # Paso 3: Instalar Angular CLI de forma global
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      - name: Run tests with coverage (headless)
-        run: ng test --watch=false --code-coverage 
+      # Paso 4: Configurar Xvfb y ejecutar las pruebas de Angular en headless
+      - name: Set up Xvfb and run tests
+        run: |
+          export DISPLAY=:99  # Necesario para que Chrome headless funcione en CI
+          Xvfb :99 -screen 0 1280x1024x24 &  # Iniciar Xvfb en un segundo plano
+          ng test --watch=false --code-coverage  # Ejecutar las pruebas en modo headless
 
+      # Paso 5: SonarQube Scan
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Usar el token de autenticación de SonarQube
         with:
           args: >
             -Dsonar.projectKey=Front_Web
@@ -57,4 +65,4 @@ jobs:
             -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.exclusions=**/*.spec.ts
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.host.url=https://sonarcloud.io  # URL de SonarCloud
