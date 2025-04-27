@@ -1,37 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl = 'https://productos-596275467600.us-central1.run.app/api/Productos/Crear';
+  private crearUrl = environment.apiUrl+'/api/Productos/Crear';
+  private consultarUrl = environment.apiUrl+'/api/Productos/Consultar';
+  private archivoUrl = environment.apiUrl+'/api/Archivos/EnviarPlanoCsv';
 
-constructor(private readonly http: HttpClient) { }
-guardarProducto(producto: any): Observable<any> {
-  return this.http.post<any>(this.apiUrl, producto);
-}
+  constructor(private readonly http: HttpClient) {}
 
-uploadFile(file: File): Observable<any> {
-  const formData = new FormData();
-  formData.append('file', file);
-
-
-  const headers = new HttpHeaders({
-    'Accept': 'text/plain'  // Puedes agregar más encabezados si es necesario
-  });
-  return this.http.post<any>('https://archivos-596275467600.us-central1.run.app/api/Archivos/EnviarPlanoCsv', formData, {
-    headers, // Puedes agregar headers si es necesario
-  });
-}
- 
-  obtenerProductos(): Observable<any> {
-    this.apiUrl='https://productos-596275467600.us-central1.run.app/api/Productos/Consultar'
-    return this.http.get(this.apiUrl);
+  guardarProducto(producto: any): Observable<any> {
+    return this.http.post<any>(this.crearUrl, producto);
   }
- 
+
+  uploadFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headers = new HttpHeaders({
+      'Accept': 'text/plain'
+    });
+
+    return this.http.post<any>(this.archivoUrl, formData, { headers });
+  }
+
+  obtenerProductos(): Observable<any> {
+    return this.http.get<any>(this.consultarUrl);
+  }
 }
-
-
-

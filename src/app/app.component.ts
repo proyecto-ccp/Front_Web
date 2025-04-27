@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'CPP_Frontend';
+  //title = 'CPP_Frontend app is running!'; ;
   seleccion: string = '';
 }
