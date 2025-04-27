@@ -11,7 +11,7 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
-      clearContext: false // Deja visible la salida de Jasmine Spec Runner
+      clearContext: false
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
     coverageReporter: {
@@ -20,7 +20,7 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' },
         { type: 'lcovonly' },
-        { type: 'lcov', subdir: '.' }, // Esto genera lcov.info necesario para Sonar
+        { type: 'lcov', subdir: '.' },
         { type: 'text-summary' }
       ],
       check: {
@@ -31,8 +31,7 @@ module.exports = function (config) {
           functions: 80
         }
       }
-    }
-     // Asegúrate de que esté solo 'ChromeHeadless'
-    
+    },
+    browsers: ['ChromeHeadless'],
   });
 };
