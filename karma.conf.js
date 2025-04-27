@@ -1,4 +1,4 @@
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -36,17 +36,17 @@ module.exports = function (config) {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
         flags: [
-          '--headless',              // Ejecutar en modo headless
-          '--no-sandbox',            // Deshabilitar sandboxing (necesario en CI)
-          '--disable-gpu',           // Deshabilitar la GPU (no es necesaria en headless)
-          '--remote-debugging-port=9222', // Habilitar la depuración remota (opcional)
-          '--disable-software-rasterizer', // Deshabilitar el rasterizador de software
-          '--disable-dev-shm-usage', // Soluciona errores con memoria compartida en CI
-          '--no-sandbox',            // Importante para evitar errores en contenedores
-          '--disable-setuid-sandbox' // Importante en entornos de CI como GitHub Actions
+          '--headless',                        // Ejecutar en modo headless
+          '--no-sandbox',                      // Deshabilitar sandboxing (necesario en CI)
+          '--disable-gpu',                     // Deshabilitar la GPU (no es necesaria en headless)
+          '--remote-debugging-port=9222',      // Habilitar la depuración remota (opcional)
+          '--disable-software-rasterizer',     // Deshabilitar el rasterizador de software
+          '--disable-dev-shm-usage',           // Soluciona errores con memoria compartida en CI
+          '--no-sandbox',                      // Importante para evitar errores en contenedores
+          '--disable-setuid-sandbox'           // Importante en entornos de CI como GitHub Actions
         ]
       }
     },
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessCI'],  // Usar el launcher configurado
   });
 };
