@@ -1,40 +1,24 @@
-name: SonarQube
-
-on:
-  push:
-    branches:
-      - main
-      - develop
-
 jobs:
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget libx11-dev libxkbfile-dev libsecret-1-dev libnss3 libgdk-pixbuf2.0-0 libasound2-dev
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      - name: Install Google Chrome (Headless)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          sudo apt-get install -y libx11-dev libxkbfile-dev libsecret-1-dev libnss3 libgdk-pixbuf2.0-0 libasound2
-
       - name: Run tests with coverage (headless)
         run: ng test --watch=false --code-coverage
-
-      - name: List coverage directory (to check if lcov.info is generated)
-        run: ls -al coverage/
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
