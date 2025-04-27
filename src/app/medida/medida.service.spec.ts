@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MedidaService } from './medida.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from 'src/environment';
 
 describe('MedidaService', () => {
   let service: MedidaService;
@@ -32,7 +33,7 @@ describe('MedidaService', () => {
     });
 
     // Simula la respuesta de la solicitud HTTP
-    const req = httpMock.expectOne('https://productos-596275467600.us-central1.run.app/api/Atributos/Medidas');
+    const req = httpMock.expectOne(environment.apiUrl+'/api/Atributos/Medidas');
     expect(req.request.method).toBe('GET');  // Verifica que el método sea GET
     req.flush(mockResponse);  // Simula la respuesta de la solicitud
   });

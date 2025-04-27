@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ProductoService } from './producto.service';  // Asegúrate de que la ruta sea correcta
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ProductoService } from './producto.service';
+import { environment } from 'src/environment';
 
 describe('ProductoService', () => {
   let service: ProductoService;
@@ -8,37 +9,60 @@ describe('ProductoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],  // Agregamos HttpClientTestingModule para simular las peticiones HTTP
-      providers: [ProductoService]  // Proveemos el ProductoService
+      imports: [HttpClientTestingModule],
+      providers: [ProductoService]
     });
-
-    // Inyectamos el servicio y el controlador HTTP
     service = TestBed.inject(ProductoService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('debería ser creado', () => {
-    expect(service).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify(); // Verifica que no haya solicitudes pendientes
   });
 
-  // Aquí puedes agregar más pruebas específicas para el servicio
-  it('debería obtener productos correctamente', () => {
-    const mockProductos = [
-      { id: 1, nombre: 'Producto 1' },
-      { id: 2, nombre: 'Producto 2' }
+  it('debería obtener productos', () => {
+    const productosMock = [
+      { nombre: 'Producto A', precio: 100 },
+      { nombre: 'Producto B', precio: 200 }
     ];
 
-    // Llamada al servicio
     service.obtenerProductos().subscribe(productos => {
-      expect(productos).toEqual(mockProductos);
+      expect(productos.length).toBe(2);
+      expect(productos).toEqual(productosMock);
     });
 
-    // Simulamos la respuesta HTTP
-    const req = httpMock.expectOne('https://productos-596275467600.us-central1.run.app/api/Productos/Consultar');
+    const req = httpMock.expectOne(environment.apiUrl+'/api/Productos/Consultar');
     expect(req.request.method).toBe('GET');
-    req.flush(mockProductos);  // Simulamos la respuesta con mockProductos
+    req.flush(productosMock);
+  });
 
-    // Verificamos que no queden peticiones pendientes
-    httpMock.verify();
+  it('debería guardar un producto', () => {
+    const producto = { nombre: 'Producto Test', precio: 123 };
+
+    service.guardarProducto(producto).subscribe(response => {
+      expect(response).toEqual({ success: true });
+    });
+
+    const req = httpMock.expectOne(environment.apiUrl+'/api/Productos/Crear');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(producto);
+    req.flush({ success: true });
+  });
+
+  it('debería subir un archivo', () => {
+    const archivoMock = new File(['contenido del archivo'], 'test.csv', { type: 'text/csv' });
+
+    service.uploadFile(archivoMock).subscribe(response => {
+      expect(response).toEqual({ mensaje: 'Archivo recibido' });
+    });
+
+    const req = httpMock.expectOne(environment.apiUrl+'/api/Archivos/EnviarPlanoCsv');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body.has('file')).toBeTrue();
+
+    const archivoEnviado = req.request.body.get('file') as File;
+    expect(archivoEnviado.name).toBe('test.csv');
+
+    req.flush({ mensaje: 'Archivo recibido' });
   });
 });
