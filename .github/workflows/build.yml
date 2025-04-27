@@ -21,7 +21,7 @@ jobs:
         run: npm install -g @angular/cli
 
       - name: Run tests with coverage (headless)
-        run: ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI
+        run: ng test --watch=false --code-coverage 
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5

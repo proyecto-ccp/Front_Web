@@ -32,14 +32,7 @@ module.exports = function (config) {
         }
       }
     },
-    // Asegúrate de tener correctamente configurado el custom launcher
-    customLaunchers: {
-      ChromeHeadlessCI: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--disable-gpu']
-      }
-    },
-    browsers: ['ChromeHeadlessCI'],
+    browsers: ['ChromeHeadlessCI'], // Asegúrate de que esté solo 'ChromeHeadless'
     
   });
 };
