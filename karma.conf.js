@@ -31,8 +31,8 @@ module.exports = function (config) {
           functions: 80
         }
       }
-    },
-    browsers: ['ChromeHeadlessCI'], // Asegúrate de que esté solo 'ChromeHeadless'
+    }
+     // Asegúrate de que esté solo 'ChromeHeadless'
     
   });
 };
