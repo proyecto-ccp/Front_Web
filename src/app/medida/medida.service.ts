@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class MedidaService {
-  private apiUrl = environment.apiUrl+'/api/Atributos/Medidas';
+  private apiUrl = environment.apiUrlAt+'/api/Atributos/Productos/Medidas';
 
 constructor(private http: HttpClient) { }
 

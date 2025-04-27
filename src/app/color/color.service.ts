@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class ColorService {
-  private apiUrl = environment.apiUrl+'/api/Atributos/colores';
+  private apiUrl = environment.apiUrlAt+'/api/Atributos/Productos/colores';
 
 constructor(private readonly http: HttpClient) { }
 

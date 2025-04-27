@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+ import { APP_VERSION } from '../environments/version';;
+
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   //title = 'CPP_Frontend app is running!'; ;
   seleccion: string = '';
+  version = APP_VERSION;
 }

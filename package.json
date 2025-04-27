@@ -1,9 +1,10 @@
 {
   "name": "cpp-frontend",
-  "version": "0.0.0",
+  "version": "2.3.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node src/set-version.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
