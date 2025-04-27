@@ -1,3 +1,10 @@
+name: SonarQube
+on:
+  push:
+    branches:
+      - main
+      - develop
+
 jobs:
   sonarqube:
     name: SonarQube
@@ -8,17 +15,13 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget libx11-dev libxkbfile-dev libsecret-1-dev libnss3 libgdk-pixbuf2.0-0 libasound2-dev
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        run: npm ci
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
       - name: Run tests with coverage (headless)
-        run: ng test --watch=false --code-coverage
+        run: ng test --watch=false --code-coverage 
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
