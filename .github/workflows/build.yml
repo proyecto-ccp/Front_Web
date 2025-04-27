@@ -17,7 +17,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: sonar-scanner \
-          -Dsonar.projectKey=mi-proyecto \
+          -Dsonar.projectKey=Front_Web \
           -Dsonar.organization=mi-org \
           -Dsonar.sources=src \
           -Dsonar.tests=src \
