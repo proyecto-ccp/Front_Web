@@ -70,7 +70,7 @@ export class FabricantesComponent implements OnInit {
 getTDocumento(){
   this.TDocumentoService.getTDcoumento().subscribe(
     (data) => {
-      this.tipoDocumento = data.documentos;
+      this.tipoDocumento = data.tiposDocumentos;
       console.log(this.tipoDocumento)
     },
     (error) => {

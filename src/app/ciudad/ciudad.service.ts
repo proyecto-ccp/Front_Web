@@ -7,7 +7,8 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class CiudadService {
-  private readonly apiUrl = environment.apiUrl+'/api/Ciudades/ListarCiudades';
+  private readonly apiUrl = environment.apiUrlAt+'/api/Atributos/Localizacion/Ciudades';
+  
 
 constructor(private  readonly http: HttpClient) { }
 getCiudad(): Observable<any> {

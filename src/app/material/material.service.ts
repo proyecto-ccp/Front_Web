@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class MaterialService {
-  private apiUrl = environment.apiUrl+'/api/Atributos/Materiales';
+  private apiUrl = environment.apiUrlAt+'/api/Atributos/Productos/Materiales';
 
   constructor(private http: HttpClient) { }
 

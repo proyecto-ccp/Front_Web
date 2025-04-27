@@ -47,6 +47,29 @@
         [(ngModel)]="vendedor.direccion">
         
     </div>
+
+    <div>
+      <label for="basic-url" class="font">Ciudad</label>
+      <select class="form-select input-design"
+        [(ngModel)]="idCiudad"
+        name="idTipoDocumento"
+        (change)="onCitySelected($event)">
+  <option *ngFor="let ciudades of ciudades" [value]="ciudades.id">
+    {{ ciudades.nombre }}
+  </option>
+</select>
+
+<div>
+  <label for="basic-url" class="font">Zona</label>
+  <select class="form-select input-design"
+    [(ngModel)]="vendedor.idzona"
+    name="idZona">
+<option *ngFor="let zonas of zonas" [value]="zonas.id">
+{{ zonas.nombre }}
+</option>
+</select>
+</div>
+    </div>
     
       <!-- Botón centrado debajo -->
       <button type="submit" class="btn btn-primary button" (click)="Guardar()">
