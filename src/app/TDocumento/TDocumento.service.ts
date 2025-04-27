@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class TDocumentoService {
-  apiURL=environment.apiUrlAt+'/api/Documentos/TiposDocumento'
+  apiURL=environment.apiUrlAt+'/api/Atributos/TiposDocumento'
 
 constructor(private http: HttpClient) { }
 getTDcoumento(): Observable<any> {

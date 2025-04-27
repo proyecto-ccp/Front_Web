@@ -8,7 +8,7 @@ import { environment } from 'src/environment';
 })
 export class ModeloService {
 
-  private apiUrl = environment.apiUrl+'/api/Atributos/Modelos';
+  private apiUrl = environment.apiUrlAt+'/api/Atributos/Productos/Modelos';
 
 constructor(private http: HttpClient) { }
  // Método para obtener las marcas

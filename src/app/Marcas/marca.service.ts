@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root',
 })
 export class MarcaService {
-  private apiUrl = environment.apiUrl+'/api/Atributos/Marcas';
+  private apiUrl = environment.apiUrlAt+'/api/Atributos/Productos/Marcas';
 
   constructor(private http: HttpClient) {}
 
