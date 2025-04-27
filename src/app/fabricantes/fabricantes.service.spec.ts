@@ -2,6 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { FabricantesService } from './fabricantes.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import { environment } from 'src/environment';
+
+
 describe('FabricantesService', () => {
   let service: FabricantesService;
   let httpMock: HttpTestingController;
@@ -30,7 +33,9 @@ describe('FabricantesService', () => {
     });
 
     // Simulamos la respuesta de la solicitud HTTP
-    const req = httpMock.expectOne('https://proveedores-596275467600.us-central1.run.app/api/Proveedores/Listar');  // Verifica que la URL solicitada sea correcta
+
+    const req = httpMock.expectOne(environment.apiUrl+'/api/Proveedores/Listar');  // Verifica que la URL solicitada sea correcta
+
     expect(req.request.method).toBe('GET');  // Verifica que sea un método GET
     req.flush(mockResponse);  // Simula la respuesta con los datos mockeados
   });
