@@ -78,17 +78,7 @@ getTDocumento(){
     }
   );
 }
- getProveedores(){
-  this.fabricantesService.getProveedores().subscribe(
-    (data) => {
-      this.fabricantes = data.fabricantes;
-      console.log(this.fabricantes)
-    },
-    (error) => {
-      console.error('Error al obtener las fabricantes', error);
-    }
-  );
-}
+ 
 
  }
   
