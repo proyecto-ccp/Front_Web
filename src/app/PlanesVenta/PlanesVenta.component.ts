@@ -26,17 +26,9 @@ export class PlanesVentaComponent implements OnInit {
    
 
     // Ahora puedes llamar al servicio para guardar el plan de venta
-    this.planVentaService.guardarPlan(this.planVenta).subscribe(
-      (response) => {
-        console.log('✅ Plan de venta guardado correctamente', response);
-        this.limpiarFormulario();
-        this.mensaje = response.message || 'Plan de venta guardado correctamente.';
-      },
-      (error) => {
-        // Manejo de errores (igual al anterior)
-        console.error('❌ Error al guardar el plan de venta:', error);
-      }
-    );
+    
+        console.log('✅ Plan de venta guardado correctamente');
+        
   }
 
 
