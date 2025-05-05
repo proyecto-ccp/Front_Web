@@ -88,7 +88,7 @@ const MY_DATE_FORMATS = {
    // MatMomentDateModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule,
+    FormsModule
     //ReactiveFormsModule
   
     
