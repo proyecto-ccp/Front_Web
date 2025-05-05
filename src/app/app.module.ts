@@ -15,12 +15,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditarComponent } from './auditar/auditar.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core'; 
+
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { DateFnsAdapter } from '@angular/material-date-fns-adapter'; // Asegúrate de usar DateFnsAdapter
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FabricantesComponent } from './fabricantes/fabricantes.component';
 import { CiudadComponent } from './ciudad/ciudad.component';
@@ -28,8 +29,23 @@ import { ConsultarProductosComponent } from './productos/consultarProductos/cons
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlanesVentaComponent } from './PlanesVenta/PlanesVenta.component';
 import { TDocumentoComponent } from './TDocumento/TDocumento.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+//
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+//import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'dd-MM-yyyy',
+  },
+  display: {
+    dateInput: 'dd-MM-yyyy',
+    monthYearLabel: 'MMM yyyy',
+    dateA11yLabel: 'LL',
+    monthDayA11yLabel: 'MM/dd',
+  },
+};
 
 @NgModule({
   declarations: [	
@@ -63,15 +79,34 @@ import { TDocumentoComponent } from './TDocumento/TDocumento.component';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+   
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     NgxPaginationModule,
+    MatDatepickerModule,
+   // MatMomentDateModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    //ReactiveFormsModule
   
     
   ],
-  providers: [],
+  
+     providers: [
+     
+      {
+        provide: DateFnsAdapter,
+        useClass: DateFnsAdapter,  // Asegúrate de usar DateFnsAdapter
+        deps: [MAT_DATE_LOCALE],
+      },
+      {
+        provide: MAT_DATE_FORMATS,
+        useValue: MY_DATE_FORMATS,
+      },
+      { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
