@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { CategoriaService } from './categoria.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 import { environment } from 'src/environment';
+
 
 describe('CategoriaService', () => {
   let service: CategoriaService;
@@ -36,7 +38,9 @@ describe('CategoriaService', () => {
       expect(data[0].nombre).toBe('Tecnología');
     });
 
+
     const req = httpMock.expectOne(environment.apiUrl+'/api/Atributos/Categorias'); // 👈 poné tu URL real acá
+
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
