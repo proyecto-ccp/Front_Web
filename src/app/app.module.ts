@@ -17,8 +17,7 @@ import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditarComponent } from './auditar/auditar.component';
 
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { DateFnsAdapter } from '@angular/material-date-fns-adapter'; // Asegúrate de usar DateFnsAdapter
+import { MatSortModule } from '@angular/material/sort'; 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -33,6 +32,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 //
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { CalendarModule } from 'primeng/calendar';
 //import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const MY_DATE_FORMATS = {
@@ -79,7 +80,7 @@ const MY_DATE_FORMATS = {
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-   
+    CalendarModule ,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -96,11 +97,7 @@ const MY_DATE_FORMATS = {
   
      providers: [
      
-      {
-        provide: DateFnsAdapter,
-        useClass: DateFnsAdapter,  // Asegúrate de usar DateFnsAdapter
-        deps: [MAT_DATE_LOCALE],
-      },
+     
       {
         provide: MAT_DATE_FORMATS,
         useValue: MY_DATE_FORMATS,
