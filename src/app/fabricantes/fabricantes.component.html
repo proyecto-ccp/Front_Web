@@ -2,49 +2,151 @@
   <div class="color-box">
     <h2 class="carga-productos">Registro de Fabricantes</h2>
   </div>
-  <div class="div-central">
-    <div>
+  <!-- Mensaje general de error del servidor -->
+<div *ngIf="mensajeError" class="alert alert-danger" role="alert">
+  <pre>{{ mensajeError }}</pre>
+</div>
+<div *ngIf="mensaje" class="alert alert-success" role="alert">
+  {{ mensaje }}
+</div>
 
-      <label for="basic-url" class="font">Nombre o Razón Social</label>
-      <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username"  [(ngModel)]="fabricantes.nombre">
-    </div>
-    <div>
-      <label for="basic-url" class="font">Tipo Documento</label>
-      <select class="form-select input-design"
-        [(ngModel)]="fabricantes.idTipoDocumento"
-        name="idTipoDocumento">
-  <option *ngFor="let tipoDocumento of tipoDocumento" [value]="tipoDocumento.id">
-    {{ tipoDocumento.codigo }}
-  </option>
-</select>
-    </div>
-    <div>
-      <label for="basic-url" class="font">Número de Documento</label>
-      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.numeroDocumento">
-    </div>
-    <div>
-      <label for="basic-url" class="font">Telefono</label>
-      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.telefono">
-    </div>
-    <div>
-      <label for="basic-url" class="font">mail</label>
-      <input type="text" class="form-control input-design" placeholder="telefono" aria-label="Username" [(ngModel)]="fabricantes.correo">
-    </div>
-    <div>
-      <label for="basic-url" class="font">Dirección</label>
-      <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username" [(ngModel)]="fabricantes.direccion">
-    </div>
-    <div>
-      <label for="basic-url" class="font">Ciudad</label>
-      <select class="form-select input-design"
-        [(ngModel)]="fabricantes.idCiudad"
-        name="idCiudad">
-  <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
-    {{ ciudad.nombre }}
-  </option>
-</select>
-    </div>
-
-    <button type="submit" class="btn btn-primary button" (click)="Guardar()">Registrar</button>
+<!-- Nombre -->
+<div>
+  <label class="font">Nombre o Razón Social</label>
+  <input type="text" class="form-control input-design" placeholder="Descripción"
+         required
+         name="nombre"
+         [(ngModel)]="fabricantes.nombre"
+         #nombre="ngModel">
+  <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">
+    El nombre es obligatorio.
   </div>
+  <div *ngIf="errores.nombre" class="text-danger">
+    {{ errores.nombre[0] }}
+  </div>
+</div>
+
+<!-- Tipo Documento -->
+<div>
+  <label class="font">Tipo Documento</label>
+  <select class="form-select input-design"
+          required
+          name="idTipoDocumento"
+          [(ngModel)]="fabricantes.idTipoDocumento"
+          #idTipoDocumento="ngModel">
+    <option value="" disabled selected>Seleccione</option>
+    <option *ngFor="let tipoDocumento of tipoDocumento" [value]="tipoDocumento.id">
+      {{ tipoDocumento.codigo }}
+    </option>
+  </select>
+  <div *ngIf="idTipoDocumento.invalid && idTipoDocumento.touched" class="text-danger">
+    El tipo de documento es obligatorio.
+  </div>
+  <div *ngIf="errores.idTipoDocumento" class="text-danger">
+    {{ errores.idTipoDocumento[0] }}
+  </div>
+</div>
+
+<!-- Número de Documento -->
+<div>
+  <label class="font">Número de Documento</label>
+  <input type="text" class="form-control input-design" placeholder="Número de Documento"
+         required pattern="^[0-9]{5,20}$"
+         name="numeroDocumento"
+         [(ngModel)]="fabricantes.numeroDocumento"
+         #numeroDocumento="ngModel">
+  <div *ngIf="numeroDocumento.invalid && numeroDocumento.touched" class="text-danger">
+    Número inválido. Solo números entre 5 y 20 dígitos.
+  </div>
+  <div *ngIf="errores.numeroDocumento" class="text-danger">
+    {{ errores.numeroDocumento[0] }}
+  </div>
+</div>
+
+<!-- Teléfono -->
+<div>
+  <label class="font">Teléfono</label>
+  <input type="text" class="form-control input-design" placeholder="(+57) 300-123-4567"
+         required pattern="^\+[\d\-\s\(\)]{10,25}$"
+         name="telefono"
+         [(ngModel)]="fabricantes.telefono"
+         #telefono="ngModel">
+  <div *ngIf="telefono.invalid && telefono.touched" class="text-danger">
+    El teléfono debe incluir el indicativo del país (ej: (+57) 300-123-4567).
+  </div>
+  <div *ngIf="errores.telefono" class="text-danger">
+    {{ errores.telefono[0] }}
+  </div>
+</div>
+
+<div>
+  <label for="basic-url" class="font">Pais</label>
+  <select class="form-select input-design"
+    [(ngModel)]="idPais"
+    name="idPais"
+    (change)="onPaisSelected()"
+   >
+<option *ngFor="let paises of paises" [value]="paises.id">
+{{ paises.nombre }}
+</option>
+</select>
+</div>
+<!-- Correo -->
+<div>
+  <label class="font">Correo</label>
+  <input type="email" class="form-control input-design" placeholder="correo@dominio.com"
+         required
+         name="correo"
+         [(ngModel)]="fabricantes.correo"
+         #correo="ngModel">
+  <div *ngIf="correo.invalid && correo.touched" class="text-danger">
+    Ingrese un correo válido.
+  </div>
+  <div *ngIf="errores.correo" class="text-danger">
+    {{ errores.correo[0] }}
+  </div>
+</div>
+
+<!-- Dirección -->
+<div>
+  <label class="font">Dirección</label>
+  <input type="text" class="form-control input-design" placeholder="Dirección"
+         required
+         name="direccion"
+         [(ngModel)]="fabricantes.direccion"
+         #direccion="ngModel">
+  <div *ngIf="direccion.invalid && direccion.touched" class="text-danger">
+    La dirección es obligatoria.
+  </div>
+  <div *ngIf="errores.direccion" class="text-danger">
+    {{ errores.direccion[0] }}
+  </div>
+</div>
+
+<!-- Ciudad -->
+<div>
+  <label class="font">Ciudad</label>
+  <select class="form-select input-design"
+          required
+          name="idCiudad"
+          [(ngModel)]="fabricantes.idCiudad"
+          #idCiudad="ngModel">
+    <option value="" disabled selected>Seleccione</option>
+    <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+      {{ ciudad.nombre }}
+    </option>
+  </select>
+  <div *ngIf="idCiudad.invalid && idCiudad.touched" class="text-danger">
+    Debe seleccionar una ciudad.
+  </div>
+  <div *ngIf="errores.idCiudad" class="text-danger">
+    {{ errores.idCiudad[0] }}
+  </div>
+</div>
+
+<!-- Botón -->
+<button type="submit" class="btn btn-primary button"
+        (click)="Guardar()">
+  Registrar
+</button>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanesVentaService } from './planesVenta.service';
+
 
 @Component({
   selector: 'app-PlanesVenta',
@@ -12,18 +14,41 @@ export class PlanesVentaComponent implements OnInit {
     fechaFin: ''
   };
 
-  constructor() { }
+  mensaje : string=""
+
+  constructor(private readonly planVentaService: PlanesVentaService) { }
 
   ngOnInit() {
   }
 
   guardarPlanVenta() {
-    console.log('Plan de Venta a guardar:', this.planVenta);
-    // Aquí podrías enviar los datos al servicio
-    alert('Plan de venta registrado exitosamente');
+    // Asegúrate de que las fechas están en el formato adecuado (yyyy-MM-dd)
+   
+
+    // Ahora puedes llamar al servicio para guardar el plan de venta
+    this.planVentaService.guardarPlan(this.planVenta).subscribe(
+      (response) => {
+        console.log('✅ Plan de venta guardado correctamente', response);
+        this.limpiarFormulario();
+        this.mensaje = response.message || 'Plan de venta guardado correctamente.';
+      },
+      (error) => {
+        // Manejo de errores (igual al anterior)
+        console.error('❌ Error al guardar el plan de venta:', error);
+      }
+    );
   }
 
-}
+
+    limpiarFormulario(){
+      this.planVenta = {
+        nombre: '',
+        fechaInicio: '',
+        fechaFin: ''
+      };
+    }
+
+  }
 
 
 
