@@ -3,7 +3,10 @@
 import { TestBed } from '@angular/core/testing';
 import { TDocumentoService } from './TDocumento.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 import { environment } from 'src/environment';
+
+
 
 describe('TDocumentoService', () => {
   let service: TDocumentoService;
@@ -40,7 +43,10 @@ describe('TDocumentoService', () => {
       expect(data.documentos[0].nombre).toBe('DNI');
     });
 
+
     const req = httpMock.expectOne(environment.apiUrl+'/api/Documentos/TiposDocumento'); // Reemplaza con la URL real del servicio
+
+
     expect(req.request.method).toBe('GET');
     req.flush(mockData);
   });
