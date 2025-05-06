@@ -12,13 +12,15 @@
     <div>
       <div>
         <label for="basic-url" class="font">fecha Inicio</label>
-        <p-calendar [(ngModel)]="planVenta.fechaInicio" [showIcon]="true" inputId="buttondisplay"></p-calendar>
+        <p-datepicker [(ngModel)]="planVenta.fecha" [showIcon]="true" inputId="buttondisplay"  />
+
       </div>
     </div>
     <div>
       <div>
         <label for="basic-url" class="font">Fecha Fin</label>
-        <p-calendar [(ngModel)]="planVenta.fechaFin" [showIcon]="true" inputId="buttondisplay"></p-calendar>
+        <p-datepicker [(ngModel)]="planVenta.fechafin" [showIcon]="true" inputId="buttondisplay" />
+
       </div>
     </div>
 
