@@ -10,6 +10,7 @@ export class ProductoService {
   private crearUrl = environment.apiUrl+'/api/Productos/Crear';
   private consultarUrl = environment.apiUrl+'/api/Productos/Consultar';
   private archivoUrl = environment.apiUrl+'/api/Archivos/EnviarPlanoCsv';
+  private addPlanV=environment.apiUrlCP+'/api/PlanesVentas';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -30,5 +31,15 @@ export class ProductoService {
 
   obtenerProductos(): Observable<any> {
     return this.http.get<any>(this.consultarUrl);
+  }
+  agregarProductos(planId: string, productos: { idProducto: number; valorTotal: number }[]): Observable<any> {
+    
+    const url = `${this.addPlanV}/${planId}/Productos`;
+    return this.http.post(url, productos, {
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      }
+    });
   }
 }

@@ -8,6 +8,8 @@ import { FabricantesComponent } from './fabricantes/fabricantes.component';
 import { AuditarComponent } from "./auditar/auditar.component";
 import { ConsultarProductosComponent } from './productos/consultarProductos/consultarProductos.component';
 import { PlanesVentaComponent } from './PlanesVenta/PlanesVenta.component';
+import { AsociarProductosComponent } from './PlanesVenta/asociar-productos/asociar-productos.component';
+import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar-vendedor.component';
 
 
 
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path: 'Fabricantes', component: FabricantesComponent},
   {path: 'Auditar', component: AuditarComponent},
   {path:'productos/consultarProductos', component: ConsultarProductosComponent},
-  {path: 'PlanesVenta', component: PlanesVentaComponent}
+  {path: 'PlanesVenta', component: PlanesVentaComponent},
+  {path: 'asociar-productos/:planId',component: AsociarProductosComponent },
+  {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent }
   // Otras rutas...
 ];
 

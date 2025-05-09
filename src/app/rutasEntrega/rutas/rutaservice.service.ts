@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RutaserviceService {
-  private apiUrl = 'https://productos-596275467600.us-central1.run.app/api/Productos/Crear';
+  private apiUrl = environment.apiUrlRu+'/api/Rutas';;
 constructor(private http: HttpClient) { 
 
 }
-guardarProducto(ruta: any): Observable<any> {
+guardarRutas(ruta: any): Observable<any> {
   return this.http.post<any>(this.apiUrl, ruta);
+}
+obtenerRutas(): Observable<any> {
+  return this.http.get<any>(this.apiUrl);
 }
 }
 

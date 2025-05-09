@@ -9,19 +9,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
+import { AsociarProductosComponent } from './PlanesVenta/asociar-productos/asociar-productos.component';
 import { RutasComponent } from './rutasEntrega/rutas/rutas.component';
+import { LOCALE_ID } from '@angular/core';
 import { MarcasComponent } from './Marcas/Marcas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditarComponent } from './auditar/auditar.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { DateFnsAdapter } from '@angular/material-date-fns-adapter'; // Asegúrate de usar DateFnsAdapter
+import { MatSortModule } from '@angular/material/sort'; 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
-
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FabricantesComponent } from './fabricantes/fabricantes.component';
 import { CiudadComponent } from './ciudad/ciudad.component';
@@ -33,17 +32,20 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 //
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar-vendedor.component';
+
+
+import { CalendarModule } from 'primeng/calendar';
 //import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'dd-MM-yyyy',
-  },
+export const CUSTOM_DATE_FORMATS = {
+  parse: { dateInput: 'DD-MM-YYYY' },
   display: {
-    dateInput: 'dd-MM-yyyy',
-    monthYearLabel: 'MMM yyyy',
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthDayA11yLabel: 'MM/dd',
+    monthYearA11yLabel: 'MMMM YYYY',
   },
 };
 
@@ -60,6 +62,8 @@ const MY_DATE_FORMATS = {
     ConsultarProductosComponent,
     PlanesVentaComponent,
     TDocumentoComponent,
+    AsociarProductosComponent,
+    AsociarVendedorComponent
     
    ],
   imports: [
@@ -79,7 +83,7 @@ const MY_DATE_FORMATS = {
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-   
+    CalendarModule ,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -88,24 +92,18 @@ const MY_DATE_FORMATS = {
    // MatMomentDateModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
-    //ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule
   
     
   ],
   
      providers: [
+      
+       provideNativeDateAdapter(),
+       { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
+       { provide: LOCALE_ID, useValue: 'en-CA' }
      
-      {
-        provide: DateFnsAdapter,
-        useClass: DateFnsAdapter,  // Asegúrate de usar DateFnsAdapter
-        deps: [MAT_DATE_LOCALE],
-      },
-      {
-        provide: MAT_DATE_FORMATS,
-        useValue: MY_DATE_FORMATS,
-      },
-      { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
     ],
   bootstrap: [AppComponent]
 })

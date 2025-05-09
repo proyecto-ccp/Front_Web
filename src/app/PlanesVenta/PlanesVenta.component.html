@@ -2,19 +2,102 @@
   <div class="color-box">
     <h2 class="carga-productos">Crear Plan de Venta</h2>
   </div>
-  <div>
-    <div>
 
-      <label for="basic-url" class="font">Nombre</label>
-      <input type="text" class="form-control input-design" placeholder="Nombre" aria-label="Username"
-        [(ngModel)]="planVenta.nombre">
-    </div>
- 
-    
-    
-      <!-- Botón centrado debajo -->
-      <button type="submit" class="btn btn-primary button" (click)="guardarPlanVenta()">
-        Registrar
-      </button>
-    </div>
+  <div *ngIf="errores.length > 0" class="alert alert-danger" role="alert">
+    {{ mensajeError}}
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
   </div>
+
+  <div *ngIf="mensaje" class="alert alert-success" role="alert">
+    {{ mensaje }}
+  </div>
+
+  <div>
+    <!-- Nombre -->
+    <div>
+      <label for="nombre" class="font">Nombre</label>
+      <input type="text" id="nombre" name="nombre" class="form-control input-design" placeholder="Nombre"
+        aria-label="Username" [(ngModel)]="planVenta.nombre" required minlength="3" #nombre="ngModel" />
+      <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">
+        <div *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</div>
+        <div *ngIf="nombre.errors?.['minlength']">Debe tener al menos 3 caracteres.</div>
+      </div>
+    </div>
+
+    <!-- Fecha Inicio -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="planVenta.fechaInicio" name="fechaInicio" required
+          #fechaInicio="ngModel" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="fechaInicio.invalid && fechaInicio.touched" class="text-danger">
+        <div *ngIf="fechaInicio.errors?.['required']">Fecha inicio es obligatoria.</div>
+      </div>
+    </div>
+
+    <!-- Fecha Fin -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="pickerfin" [(ngModel)]="planVenta.fechaFin" name="fechaFin" required
+          #fechaFin="ngModel" />
+        <mat-datepicker-toggle matSuffix [for]="pickerfin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerfin></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="fechaFin.invalid && fechaFin.touched" class="text-danger">
+        <div *ngIf="fechaFin.errors?.['required']">Fecha fin es obligatoria.</div>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit" class="btn btn-primary button" (click)="guardarPlanVenta()">
+      Registrar
+    </button>
+  </div>
+
+  <!-- Tabla de planes creados -->
+  <div *ngIf="planCreado.length > 0" class="mt-4">
+    <h4>Planes Registrados</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Asociar Productos</th>
+          <th>Asociar Vendedores</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plan of planCreado">
+          <td>{{ plan.nombre }}</td>
+          <td>{{ plan.fechaInicio | date:'dd/MM/yyyy' }}</td>
+          <td>{{ plan.fechaFinal | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-success"
+              (click)="irAAsociarProductos(plan)"
+              [disabled]="plan.tieneProductos"
+            >
+              Asociar Productos
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-sm btn-success"
+              (click)="irAAsociarVendedores(plan)"
+              [disabled]="!plan.tieneProductos"
+            >
+              Asociar Vendedores
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

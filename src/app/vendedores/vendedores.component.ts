@@ -25,6 +25,7 @@ export class VendedoresComponent implements OnInit {
   idIndicativo: string = '';
   indicativo: string = '';
   idPais : number = 0;
+  paisSeleccionado: string ='';
 
 
   vendedor = {
@@ -56,9 +57,11 @@ export class VendedoresComponent implements OnInit {
     this.mensajeError = '';
     this.mensaje = '';
     
-
+    this.vendedor.telefono = `${this.indicativo} ${this.vendedor.telefono}`;
+    console.log('Teléfono final con indicativo:', this.vendedor.telefono);
     // Llamar al servicio para guardar el producto
     console.log(this.vendedor.telefono);
+  
     this.vendedor.idTipoDocumento = Number(this.vendedor.idTipoDocumento);
     this.vendedorService.guardarVendedores(this.vendedor).subscribe(
       (response) => {
@@ -145,24 +148,32 @@ export class VendedoresComponent implements OnInit {
   onPaisSelected(): void {
     if (!this.idPais) return;
   
-    this.paisService.getIndicativoPais(this.idPais).subscribe(
-      (data) => {
-        const indicativo = (data.pais.indicativo || '') + ' ';
-  
-        // Solo continúa si ya hay un teléfono ingresado
-        if (this.vendedor.telefono) {
-          // Limpia cualquier indicativo anterior
-          //this.vendedor.telefono = this.vendedor.telefono.replace(/^\+?\d{1,4}/, '');
-  
-          // Concatena indicativo + teléfono limpio
-          this.vendedor.telefono = `${indicativo}${this.vendedor.telefono}`;
-          console.log('Teléfono con indicativo:', this.vendedor.telefono);
-        }
+    this.paisService.getIndicativoPais(this.idPais).subscribe({
+      next: (data) => {
+        this.indicativo = data.pais.indicativo || '';
+        console.log('Indicativo cargado:', this.indicativo);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al obtener el indicativo:', error);
       }
-    );
+    });
+  }
+
+  get telefonoFormateado(): string {
+    return this.vendedor.telefono;
+  }
+  
+  set telefonoFormateado(valor: string) {
+    const limpio = valor.replace(/\D/g, '').substring(0, 10); // solo 10 dígitos
+    
+  
+    if (limpio.length >= 7) {
+      this.vendedor.telefono = `${limpio.slice(0, 3)}-${limpio.slice(3, 6)}-${limpio.slice(6)}`;
+    } else if (limpio.length >= 4) {
+      this.vendedor.telefono = `${limpio.slice(0, 3)}-${limpio.slice(3)}`;
+    } else {
+      this.vendedor.telefono = limpio;
+    }
   }
 
   getTDocumento() {

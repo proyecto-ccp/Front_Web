@@ -1,0 +1,35 @@
+<div class="color-box">
+  <div class="color-box">
+    <h2 class="carga-productos">Asociar Productos al plan de Venta</h2>
+  </div>
+
+  <div *ngIf="errores.length > 0" class="alert alert-danger" role="alert">
+    {{ mensajeError}}
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-success" role="alert">
+    {{ mensaje }}
+  </div>
+    <div *ngFor="let vendedor of vendedores">
+      <label>
+        <input
+          type="checkbox"
+          [value]="vendedor.id"
+          (change)="toggleSeleccion(vendedor.id)"
+          [checked]="vendedoresSeleccionados.includes(vendedor.id)"
+        />
+        {{ vendedor.nombre }}
+      </label>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-3" (click)="guardarAsociacion()">
+      Asociar Vendedores
+    </button>
+  
+</div>
+
+
+

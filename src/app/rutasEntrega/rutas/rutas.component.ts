@@ -1,30 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RutaserviceService } from './rutaservice.service';
 
 @Component({
   selector: 'app-rutas',
   templateUrl: './rutas.component.html',
   styleUrls: ['./rutas.component.scss']
 })
-export class RutasComponent {
+export class RutasComponent implements OnInit {
 
-  // Aquí puedes definir las propiedades del formulario, si es necesario
-  // Ejemplo: model para el formulario
+  mensaje = '';
+  errores: string[] = [];
+  mensajeError = '';
+  rutas: any[] = [];
+
   model = {
-    idpedido: '',
-    direccionDestino: '',
     direccionOrigen: '',
+    direccionDestino: '',
     tipoEntrega: '',
-    tiempoEntrega: '',
-    metodoTransporte: '',
-    fechaEntrega: ''
+    metodoTransporte: ''
   };
 
-  // Método que se invoca cuando se envía el formulario
-  onSubmit() {
+  constructor(private readonly rutaservice: RutaserviceService) {}
+
+  ngOnInit() {
+    // Si deseas que guarde automáticamente al iniciar, descomenta:
+    // this.guardarRutas();
+    this.obtenerRutas();
+  }
+
+  guardarRutas() {
+    this.mensaje = '';
+    this.errores = [];
+    this.mensajeError = '';
+
+    this.rutaservice.guardarRutas(this.model).subscribe({
+      next: (resp) => {
+        this.mensaje = 'Ruta creada con éxito.';
+        this.mensajeError = '';
+        console.log("Respuesta del backend:", resp);
+      },
+      error: (err) => {
+        this.mensajeError = 'Ocurrió un error al crear la ruta.';
+        const backendErrors = err.error?.errors;
+        if (backendErrors) {
+          for (const campo in backendErrors) {
+            this.errores.push(...backendErrors[campo]);
+          }
+        } else {
+          this.errores.push(err.message || 'Error desconocido.');
+        }
+      }
+    });
+
     console.log("Formulario enviado:", this.model);
-    // Aquí puedes agregar la lógica para manejar el envío del formulario
-    // Ejemplo: enviar los datos a un servicio, o realizar alguna acción
+  }
+  obtenerRutas() {
+    this.rutaservice.obtenerRutas().subscribe({
+      next: (data) => {
+        this.rutas = data.rutas || data;  // Ajusta según estructura del backend
+        console.log('Rutas obtenidas:', this.rutas);
+      },
+      error: (error) => {
+        console.error('Error al obtener rutas:', error);
+        this.mensajeError = 'Error al obtener rutas.';
+      }
+    });
+  }
+  asociarPedido(ruta: string){
+
   }
 }
-
 

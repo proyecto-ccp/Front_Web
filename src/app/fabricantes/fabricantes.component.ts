@@ -47,7 +47,8 @@ export class FabricantesComponent implements OnInit {
     this.errores = {};
     this.mensajeError = '';
     this.mensaje = '';
-
+    this.fabricantes.telefono = `${this.indicativo} ${this.fabricantes.telefono}`;
+    console.log('Teléfono final con indicativo:', this.fabricantes.telefono);
     this.fabricantesService.guardarProveedores(this.fabricantes).subscribe(
       (response) => {
         console.log('Fabricante guardado correctamente', response);
@@ -141,21 +142,34 @@ export class FabricantesComponent implements OnInit {
   }
 
   onPaisSelected(): void {
-    if (!this.idPais || !this.fabricantes.telefono) return;
-
-    this.paisService.getIndicativoPais(this.idPais).subscribe(
-      (data) => {
-        const indicativo = (data.pais.indicativo || '') + ' ';
-        
-        // Limpia cualquier indicativo anterior para evitar duplicados
-        //this.fabricantes.telefono = this.fabricantes.telefono.replace(/^\+?\d{1,4}/, '');
-        this.fabricantes.telefono = `${indicativo} `+' '+` ${this.fabricantes.telefono}`;
-        console.log('Teléfono con indicativo:', this.fabricantes.telefono);
+    if (!this.idPais) return;
+  
+    this.paisService.getIndicativoPais(this.idPais).subscribe({
+      next: (data) => {
+        this.indicativo = data.pais.indicativo || '';
+        console.log('Indicativo cargado:', this.indicativo);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al obtener el indicativo:', error);
       }
-    );
+    });
+  }
+
+  get telefonoFormateado(): string {
+    return this.fabricantes.telefono;
+  }
+  
+  set telefonoFormateado(valor: string) {
+    const limpio = valor.replace(/\D/g, '').substring(0, 10); // solo 10 dígitos
+    
+  
+    if (limpio.length >= 7) {
+      this.fabricantes.telefono = `${limpio.slice(0, 3)}-${limpio.slice(3, 6)}-${limpio.slice(6)}`;
+    } else if (limpio.length >= 4) {
+      this.fabricantes.telefono = `${limpio.slice(0, 3)}-${limpio.slice(3)}`;
+    } else {
+      this.fabricantes.telefono = limpio;
+    }
   }
 
   getPaises() {

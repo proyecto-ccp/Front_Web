@@ -7,15 +7,16 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class FabricantesService {
-  private  apiUrl = environment.apiUrlfa+'/api/Proveedores/Crear' 
+  private  apiUrl = environment.apiUrlfa+'/api/Proveedores/Crear'; 
+  private apiUrlL='';
 
 constructor(private readonly  http: HttpClient) { }
 guardarProveedores(proveedor: any): Observable<any> {
   return this.http.post<any>(this.apiUrl, proveedor);
 }
 getProveedores(): Observable<any> {
-  this.apiUrl=environment.apiUrlfa+'/api/Proveedores/Listar'
-  return this.http.get<any>(this.apiUrl);
+  this.apiUrlL=environment.apiUrlfa+'/api/Proveedores/Listar'
+  return this.http.get<any>(this.apiUrlL);
 }
 
 }
