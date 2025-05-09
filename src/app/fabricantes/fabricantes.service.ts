@@ -16,7 +16,7 @@ guardarProveedores(proveedor: any): Observable<any> {
 }
 getProveedores(): Observable<any> {
   this.apiUrlL=environment.apiUrlfa+'/api/Proveedores/Listar'
-  return this.http.get<any>(this.apiUrl);
+  return this.http.get<any>(this.apiUrlL);
 }
 
 }

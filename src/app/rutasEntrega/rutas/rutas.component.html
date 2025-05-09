@@ -2,53 +2,83 @@
   <div class="color-box">
     <h2 class="carga-productos">Rutas de Entrega</h2>
   </div>
-    <div > 
-      <div >
 
-        <label for="basic-url" class="font">Dirección Origen </label>
-        <input type="text" class="form-control input-redondo" placeholder="Dirección Origen" aria-label="Dirección Origen ">
-      </div>
-      <div >
+  <!-- Mensajes -->
+  <div *ngIf="mensaje" class="alert alert-success">{{ mensaje }}</div>
+  <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
+  <div *ngFor="let error of errores" class="text-danger">{{ error }}</div>
 
-        <label for="basic-url" class="font">Dirección Destino</label>
-        <input type="text" class="form-control input-redondo" placeholder="Dirección Destino" aria-label="Dirección Destino">
-      </div>
+  <!-- Formulario -->
+  <div>
+    <label class="font">Dirección Origen</label>
+    <input type="text" class="form-control input-redondo" placeholder="Dirección Origen"
+           [(ngModel)]="model.direccionOrigen" name="direccionOrigen">
+  </div>
 
-      <div >
+  <div>
+    <label class="font">Dirección Destino</label>
+    <input type="text" class="form-control input-redondo" placeholder="Dirección Destino"
+           [(ngModel)]="model.direccionDestino" name="direccionDestino">
+  </div>
 
-        <label for="basic-url" class="font">Tipo de entrega </label>
-        <select class="form-select input-redondo" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-        
-      </div>
-      <div >
+  <div>
+    <label class="font">Tipo de Entrega</label>
+    <select class="form-select input-redondo"
+            [(ngModel)]="model.tipoEntrega" name="tipoEntrega">
+      <option value="" disabled selected>Seleccione un tipo</option>
+      <option value="express">Express</option>
+      <option value="normal">Normal</option>
+      <option value="programada">Programada</option>
+    </select>
+  </div>
 
-        <label for="basic-url" class="font">Tiempo de Entrega </label>
-        <input type="text" class="form-control input-redondo" placeholder="Tiempo de Entrega" aria-label="Tiempo de Entrega">
-      </div>
-      <div >
+  <div>
+    <label class="font">Método de Transporte</label>
+    <select class="form-select input-redondo"
+            [(ngModel)]="model.metodoTransporte" name="metodoTransporte">
+      <option value="" disabled selected>Seleccione un método</option>
+      <option value="terrestre">Terrestre</option>
+      <option value="aéreo">Aéreo</option>
+      <option value="marítimo">Marítimo</option>
+    </select>
+  </div>
 
-        <label for="basic-url" class="font">Método de Transporte</label>
-        <select class="form-select input-redondo" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div >
+  <button (click)="guardarRutas()" class="btn btn-primary button mt-3">Guardar</button>
 
-        <label for="basic-url" class="font">Fecha de Entrega</label>
-        <input type="text" class="form-control input-redondo" placeholder="Fecha de Entrega" aria-label="Fecha de Entrega">
-      </div>
-      
-      <button type="submit" class="btn btn-primary button">Guardar</button>
+  <div class="color-box mt-4">
+    <h3 class="carga-productos">Listado de Rutas</h3>
+  
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Tipo Entrega</th>
+          <th>Método Transporte</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ruta of rutas; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ ruta.direccionOrigen }}</td>
+          <td>{{ ruta.direccionDestino }}</td>
+          <td>{{ ruta.tipoEntrega }}</td>
+          <td>{{ ruta.metodoTransporte }}</td>
+          
+          <td>
+            <button class="btn btn-sm btn-success" (click)="asociarPedido(ruta)">Asociar Pedido</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="rutas.length === 0" class="text-muted">
+      No hay rutas registradas.
     </div>
   </div>
+</div>
 
 
 

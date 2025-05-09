@@ -1,0 +1,79 @@
+<div class="color-box">
+  <div class="color-box">
+    <h2 class="carga-productos">Asociar Productos al plan de Venta</h2>
+  </div>
+
+  <div *ngIf="errores.length > 0" class="alert alert-danger" role="alert">
+    {{ mensajeError}}
+    <ul>
+      <li *ngFor="let error of errores">{{ error }}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-success" role="alert">
+    {{ mensaje }}
+  </div>
+  <div class="col-md-4">
+    <label for="basic-url">Digite Id Producto</label>
+    <input type="text" class="form-control" placeholder="Filtrar por ID del Producto" [(ngModel)]="filtroIdProducto"  (input)="aplicarFiltrosId()">
+  </div>
+  <div class="col-md-4">
+    <label for="basic-url">Id del Proveedor</label> 
+    <input type="text" class="form-control" placeholder="Filtrar por Proveedor" [(ngModel)]="filtroProveedor" (input)="aplicarFiltrosProveedor()">
+  </div>
+
+  <!-- Productos -->
+  <div *ngIf="productosPaginados.length > 0; else loading" class="row">
+    <div *ngFor="let producto of productosPaginados" class="col-md-6 mb-3">
+      <div class="border rounded p-3 h-100">
+        <!-- Checkbox + Nombre -->
+        <div class="form-check mb-2">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="producto.seleccionado" 
+            class="form-check-input" 
+            [id]="'producto-' + producto.id">
+          <label class="form-check-label fw-bold ms-4" [for]="'producto-' + producto.id">
+            {{ producto.nombre }}
+          </label>
+        </div>
+
+        <!-- Precio Unitario -->
+        <div class="mb-2 ms-4">
+          <label class="fw-semibold">Precio Unitario:</label>
+          <span class="ms-2">${{ producto.precioUnitario }}</span>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="ms-4">
+          <label class="fw-semibold">Cantidad:</label>
+          <input 
+            type="number" 
+            class="form-control w-50 d-inline-block ms-2" 
+            min="1" 
+            [(ngModel)]="producto.cantidad" 
+            placeholder="Ej: 1" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginador -->
+  <mat-paginator 
+    [length]="totalProductos"
+    [pageSize]="pageSize"
+    (page)="cambiarPagina($event)">
+  </mat-paginator>
+
+  <!-- Botón -->
+  <div class="mt-4 text-end">
+    <button class="btn btn-primary" (click)="asociarProductos()">Asociar Productos</button>
+  </div>
+
+  <!-- Cargando -->
+  <ng-template #loading>
+    <div class="mt-3">
+      <p>Cargando productos...</p>
+    </div>
+  </ng-template>
+</div>
