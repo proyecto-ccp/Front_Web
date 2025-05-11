@@ -37,6 +37,7 @@ import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar
 
 
 import { CalendarModule } from 'primeng/calendar';
+import { ConsultarBodegasComponent } from './productos/consultarBodegas/consultarBodegas.component';
 //import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 export const CUSTOM_DATE_FORMATS = {
@@ -63,7 +64,8 @@ export const CUSTOM_DATE_FORMATS = {
     PlanesVentaComponent,
     TDocumentoComponent,
     AsociarProductosComponent,
-    AsociarVendedorComponent
+    AsociarVendedorComponent,
+    ConsultarBodegasComponent
     
    ],
   imports: [

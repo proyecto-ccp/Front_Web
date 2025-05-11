@@ -19,6 +19,11 @@
             <p class="card-text">{{ producto.descripcion }}</p>
             <p><strong>Precio:</strong> {{ producto.precioUnitario | currency:'USD' }}</p>
           </div>
+          <div>
+            <button (click)="irAConsultarBodegas(producto)">Ver Localización</button>
+              
+            
+          </div>
         </div>
       </div>
     </div>
