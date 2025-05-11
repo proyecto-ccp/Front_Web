@@ -10,6 +10,7 @@ import { ConsultarProductosComponent } from './productos/consultarProductos/cons
 import { PlanesVentaComponent } from './PlanesVenta/PlanesVenta.component';
 import { AsociarProductosComponent } from './PlanesVenta/asociar-productos/asociar-productos.component';
 import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar-vendedor.component';
+import { ConsultarBodegasComponent } from './productos/consultarBodegas/consultarBodegas.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'productos/consultarProductos', component: ConsultarProductosComponent},
   {path: 'PlanesVenta', component: PlanesVentaComponent},
   {path: 'asociar-productos/:planId',component: AsociarProductosComponent },
-  {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent }
+  {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent },
+  {path: 'consultarBodegas/:productoId',component: ConsultarBodegasComponent  }
   // Otras rutas...
 ];
 

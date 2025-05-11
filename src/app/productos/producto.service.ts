@@ -11,6 +11,7 @@ export class ProductoService {
   private consultarUrl = environment.apiUrl+'/api/Productos/Consultar';
   private archivoUrl = environment.apiUrl+'/api/Archivos/EnviarPlanoCsv';
   private addPlanV=environment.apiUrlCP+'/api/PlanesVentas';
+  private bodegasUrl=environment.apiUrl+'/api/Productos'
 
   constructor(private readonly http: HttpClient) {}
 
@@ -41,5 +42,11 @@ export class ProductoService {
         'accept': 'application/json'
       }
     });
+  }
+  getBodegas(productoId: number): Observable<any> {
+   
+    const url = `${this.bodegasUrl}/${productoId}/bodegas`;
+    console.log("URLBODEGAS"+url);
+    return this.http.get<any>(url);
   }
 }

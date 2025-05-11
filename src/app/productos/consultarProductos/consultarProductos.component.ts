@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../producto.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultarProductos',
@@ -12,9 +13,10 @@ export class ConsultarProductosComponent implements OnInit {
   filtroProveedor: string = '';
   filtroIdProducto: string = '';
   productosFiltrados: any[] = [];
+  
 
   
-  constructor(private ProductoService: ProductoService) { }
+  constructor(private ProductoService: ProductoService, private router: Router) { }
 
   ngOnInit() {
     this.obtenerProductos();
@@ -42,6 +44,9 @@ export class ConsultarProductosComponent implements OnInit {
         (!this.filtroIdProducto || p.id?.toString().includes(this.filtroIdProducto))
       );
 
+  }
+  irAConsultarBodegas(productoId: any) {
+    this.router.navigate(['/consultarBodegas/', productoId.id]);
   }
   
     

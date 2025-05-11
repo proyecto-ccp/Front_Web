@@ -1,0 +1,40 @@
+<div class="color-box">
+  <h2 class="carga-productos">Localización de Productos</h2>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngIf="bodegas.length > 0" class="text-center mb-4">
+    <h4>Producto: {{ bodegas[0].producto }}</h4>
+    <p><strong>ID Producto:</strong> {{ bodegas[0].idproducto }}</p>
+  </div>
+
+  <div class="mb-3 text-center">
+    <p class="mb-1 mt-3"><strong>Filtrar por el ID de Bodega:</strong></p>
+    <input type="text" class="form-control w-50 mx-auto"
+           placeholder="Filtrar por bodega..."
+           [(ngModel)]="filtroBodega"
+           (input)="filtrarBodegas()" />
+  </div>
+
+  <div class="row mx-auto">
+    <div class="col-12 mb-4 d-flex justify-content-center bodega-wrapper" *ngFor="let bodega of bodegasFiltradas">
+      <div class="bodega-card">
+        <!-- Línea 1: Ciudad y Bodega -->
+        <div class="d-flex justify-content-between mb-2">
+          <p class="mb-0"><strong>Ciudad:</strong> {{ bodega.ciudad }}</p>
+          <p class="mb-0"><strong>Bodega:</strong> {{ bodega.bodega }} (ID: {{ bodega.idBodega }})</p>
+        </div>
+
+        <!-- Encabezado de ubicación -->
+        <p class="mb-1 mt-3"><strong>Ubicación:</strong></p>
+
+        <!-- Línea 2: Pasillo, Estante, Nivel -->
+        <div class="d-flex justify-content-between">
+          <p class="mb-0"><strong>Pasillo:</strong> {{ bodega.pasillo }}</p>
+          <p class="mb-0"><strong>Estante:</strong> {{ bodega.estante }}</p>
+          <p class="mb-0"><strong>Nivel:</strong> {{ bodega.nivel }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
