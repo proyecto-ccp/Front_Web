@@ -44,7 +44,7 @@ describe('TDocumentoService', () => {
     });
 
 
-    const req = httpMock.expectOne(environment.apiUrl+'/api/Documentos/TiposDocumento'); // Reemplaza con la URL real del servicio
+    const req = httpMock.expectOne(environment.apiUrlAt+'/api/Atributos/TiposDocumento'); // Reemplaza con la URL real del servicio
 
 
     expect(req.request.method).toBe('GET');

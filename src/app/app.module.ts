@@ -38,6 +38,12 @@ import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar
 
 import { CalendarModule } from 'primeng/calendar';
 import { ConsultarBodegasComponent } from './productos/consultarBodegas/consultarBodegas.component';
+import { LoginComponent } from './login/login.component';
+import { ReporteComponent } from './reporte/reporte.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
+
 //import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 export const CUSTOM_DATE_FORMATS = {
@@ -65,7 +71,9 @@ export const CUSTOM_DATE_FORMATS = {
     TDocumentoComponent,
     AsociarProductosComponent,
     AsociarVendedorComponent,
-    ConsultarBodegasComponent
+    ConsultarBodegasComponent,
+    LoginComponent,
+    ReporteComponent
     
    ],
   imports: [
@@ -104,7 +112,10 @@ export const CUSTOM_DATE_FORMATS = {
       
        provideNativeDateAdapter(),
        { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
-       { provide: LOCALE_ID, useValue: 'en-CA' }
+       { provide: LOCALE_ID, useValue: 'en-CA' },
+       {provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true }
      
     ],
   bootstrap: [AppComponent]

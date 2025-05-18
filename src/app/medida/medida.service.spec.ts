@@ -36,7 +36,7 @@ describe('MedidaService', () => {
 
     // Simula la respuesta de la solicitud HTTP
 
-    const req = httpMock.expectOne(environment.apiUrl+'/api/Atributos/Medidas');
+    const req = httpMock.expectOne(environment.apiUrlAt+'/api/Atributos/Productos/Medidas');
 
     expect(req.request.method).toBe('GET');  // Verifica que el método sea GET
     req.flush(mockResponse);  // Simula la respuesta de la solicitud

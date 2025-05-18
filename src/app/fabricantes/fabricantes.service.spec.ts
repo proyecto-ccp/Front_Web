@@ -1,47 +1,61 @@
 import { TestBed } from '@angular/core/testing';
-import { FabricantesService } from './fabricantes.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
+import { FabricantesService } from './fabricantes.service';
 import { environment } from 'src/environment';
-
 
 describe('FabricantesService', () => {
   let service: FabricantesService;
   let httpMock: HttpTestingController;
 
+  const apiUrlCrear = `${environment.apiUrlfa}/api/Proveedores/Crear`;
+  const apiUrlListar = `${environment.apiUrlfa}/api/Proveedores/Listar`;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],  // Importa HttpClientTestingModule aquí
+      imports: [HttpClientTestingModule],
       providers: [FabricantesService]
     });
-
-    service = TestBed.inject(FabricantesService);  // Obtiene la instancia del servicio
-    httpMock = TestBed.inject(HttpTestingController);  // Obtiene la instancia de HttpTestingController
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();  // Comprobamos que el servicio fue creado correctamente
-  });
-
-  it('should fetch fabricantes from API', () => {
-    const mockResponse = [{ id: 1, nombre: 'Fabricante1' }, { id: 2, nombre: 'Fabricante2' }];
-    
-    // Llamamos al método del servicio que hace una solicitud HTTP
-    service.getProveedores().subscribe(fabricantes => {
-      expect(fabricantes.length).toBe(2);
-      expect(fabricantes).toEqual(mockResponse);
-    });
-
-    // Simulamos la respuesta de la solicitud HTTP
-
-    const req = httpMock.expectOne(environment.apiUrl+'/api/Proveedores/Listar');  // Verifica que la URL solicitada sea correcta
-
-    expect(req.request.method).toBe('GET');  // Verifica que sea un método GET
-    req.flush(mockResponse);  // Simula la respuesta con los datos mockeados
+    service = TestBed.inject(FabricantesService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    // Verifica que no haya solicitudes pendientes
+    // Verifica que no haya solicitudes HTTP pendientes
     httpMock.verify();
+  });
+
+  it('debería guardar un proveedor correctamente', () => {
+    const proveedorMock = { id: '1', nombre: 'Proveedor A', categoria: 'Electrónica' };
+
+    service.guardarProveedores(proveedorMock).subscribe(response => {
+      expect(response).toEqual(proveedorMock);
+    });
+
+    // Verifica que se haya realizado la solicitud POST con la URL correcta
+    const req = httpMock.expectOne(apiUrlCrear);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(proveedorMock);
+
+    // Simula la respuesta con datos mockeados
+    req.flush(proveedorMock);
+  });
+
+  it('debería listar los proveedores correctamente', () => {
+    const proveedoresMock = [
+      { id: '1', nombre: 'Proveedor A', categoria: 'Electrónica' },
+      { id: '2', nombre: 'Proveedor B', categoria: 'Ropa' }
+    ];
+
+    service.getProveedores().subscribe(response => {
+      expect(response).toEqual(proveedoresMock);
+      expect(response.length).toBe(2);
+    });
+
+    // Verifica que se haya realizado la solicitud GET con la URL correcta
+    const req = httpMock.expectOne(apiUrlListar);
+    expect(req.request.method).toBe('GET');
+
+    // Simula la respuesta con los proveedores mockeados
+    req.flush(proveedoresMock);
   });
 });

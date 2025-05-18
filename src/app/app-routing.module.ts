@@ -11,20 +11,29 @@ import { PlanesVentaComponent } from './PlanesVenta/PlanesVenta.component';
 import { AsociarProductosComponent } from './PlanesVenta/asociar-productos/asociar-productos.component';
 import { AsociarVendedorComponent } from './PlanesVenta/asociar-vendedor/asociar-vendedor.component';
 import { ConsultarBodegasComponent } from './productos/consultarBodegas/consultarBodegas.component';
+import { LoginComponent } from './login/login.component';
+import { InicioComponent } from './login/inicio/inicio.component';
+import { ReporteComponent } from './reporte/reporte.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
 const routes: Routes = [
-  { path: 'rutasEntrega/rutas', component: RutasComponent },
-  { path: 'cargar-productos', component: ProductosComponent },
-  {path: 'vendedores', component: VendedoresComponent},
-  {path: 'Fabricantes', component: FabricantesComponent},
-  {path: 'Auditar', component: AuditarComponent},
-  {path:'productos/consultarProductos', component: ConsultarProductosComponent},
-  {path: 'PlanesVenta', component: PlanesVentaComponent},
-  {path: 'asociar-productos/:planId',component: AsociarProductosComponent },
-  {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent },
-  {path: 'consultarBodegas/:productoId',component: ConsultarBodegasComponent  }
+  { path: 'login', component: LoginComponent  },
+  { path: 'rutasEntrega/rutas', component: RutasComponent, canActivate: [AuthGuard] },
+  { path: 'cargar-productos', component: ProductosComponent, canActivate: [AuthGuard] },
+  {path: 'vendedores', component: VendedoresComponent, canActivate: [AuthGuard]},
+  {path: 'Fabricantes', component: FabricantesComponent,canActivate: [AuthGuard]},
+  {path: 'Auditar', component: AuditarComponent, canActivate: [AuthGuard]},
+  {path:'productos/consultarProductos', component: ConsultarProductosComponent, canActivate: [AuthGuard]},
+  {path: 'PlanesVenta', component: PlanesVentaComponent, canActivate: [AuthGuard]},
+  {path: 'asociar-productos/:planId',component: AsociarProductosComponent, canActivate: [AuthGuard] },
+  {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent, canActivate: [AuthGuard] },
+  {path: 'consultarBodegas/:productoId',component: ConsultarBodegasComponent, canActivate: [AuthGuard]  },
+  {path: 'reportes',component: ReporteComponent, canActivate: [AuthGuard] },
+  {path: 'inicio',component: InicioComponent, canActivate: [AuthGuard]},
+   // redirige raíz a inicio
+ // { path: '', redirectTo: 'login', pathMatch: 'full' }
   // Otras rutas...
 ];
 

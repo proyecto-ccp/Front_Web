@@ -1,0 +1,76 @@
+
+<div class="color-box">
+  <div class="color-box">
+    <h3 class="text-center mb-4">Informe de Ventas por Vendedor</h3>
+  </div>
+<div class="informe-container">
+  <form (ngSubmit)="consultarInforme()" #form="ngForm" class="mb-4">
+    <div class="form-row d-flex gap-3">
+      <div class="form-group flex-fill me-2">
+      <label for="codigoVendedor">Código del Vendedor</label>
+      <input
+        type="text"
+        id="codigoVendedor"
+        [(ngModel)]="codigoVendedor"
+        name="codigoVendedor"
+        required
+        class="form-control"
+      />
+    </div>
+  
+
+    <div class="form-group mb-3">
+      <label for="fecha">Fecha</label>
+      <input
+        type="date"
+        id="fecha"
+        [(ngModel)]="fecha"
+        name="fecha"
+        required
+        class="form-control"
+      />
+    </div>
+    </div>
+    <div class="boton_centro">
+    <button type="submit" class="btn btn-primary button w-50" [disabled]="form.invalid">
+      Consultar Informe
+    </button>
+  </div>
+  </form>
+
+  <!-- Información del Vendedor -->
+<div class="vendedor-info mb-4 p-3 border rounded bg-light card-body card_1">
+  <h5>Datos del Vendedor</h5>
+
+  <div class="d-flex justify-content-between mb-2">
+    <p class="mb-0"><strong>ID:</strong> {{ codigoVendedor }}</p>
+    <p class="mb-0"><strong>Nombre:</strong> {{ informe.nombre }}</p>
+  </div>
+
+  <div class="d-flex justify-content-between mb-2">
+    <p class="mb-0"><strong>Zona / Área:</strong> {{ informe.zona }}</p>
+    <p class="mb-0"><strong>País:</strong> {{ informe.pais }}</p>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <p class="mb-0"><strong>Fecha del Informe:</strong> {{ informe.fecha }}</p>
+    <p class="mb-0"><strong>Moneda:</strong> {{ informe.moneda }}</p>
+  </div>
+</div>
+
+    <!-- Información de Ventas -->
+    <div class="card shadow-sm card_2">
+      <div class="card-body">
+        <p><strong>Ventas Totales:</strong> {{ informe.ventasTotales | currency:informe.moneda:'symbol' }}</p>
+        <p><strong>Unidades Vendidas:</strong> {{ informe.unidadesVendidas }}</p>
+        <p><strong>Valor Promedio:</strong> {{ informe.valorPromedio | currency:informe.moneda:'symbol' }}</p>
+      </div>
+        <!-- Botón -->
+        <button type="submit" class="btn btn-primary w-50 button">
+          Ver detalle por producto
+        </button>
+      </div>
+      
+      
+    </div>
+  </div>

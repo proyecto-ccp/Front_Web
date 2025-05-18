@@ -39,7 +39,7 @@ describe('CategoriaService', () => {
     });
 
 
-    const req = httpMock.expectOne(environment.apiUrl+'/api/Atributos/Categorias'); // 👈 poné tu URL real acá
+    const req = httpMock.expectOne(environment.apiUrlAt+'/api/Atributos/Productos/Categorias'); // 👈 poné tu URL real acá
 
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);

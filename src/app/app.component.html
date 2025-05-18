@@ -1,3 +1,5 @@
+
+<ng-container *ngIf="mostrarMenu; else loginOnly">
 <div class="container">
   <!--Logo-->
   <div class="col-12 row">
@@ -13,42 +15,61 @@
         <div class="col-12 col-md-4"> <!--d-flex justify-content-center align-items-center-->
           <ul class="navbar-nav size-ul">
             <li class="nav-item">
-              <a class="nav-link text-red type-text size-subtitles" routerLink="Fabricantes">Registrar Fabricantes</a>
+              <a class="nav-link text-red type-text size-subtitles"  *ngIf="menuColor === 'rojo' || menuColor == 'negro' " routerLink="Fabricantes">Registrar Fabricantes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-red type-text size-subtitles" routerLink="/cargar-productos">Cargar Productos</a>
+              <a class="nav-link text-red type-text size-subtitles" *ngIf="menuColor === 'rojo' || menuColor == 'negro' " routerLink="/cargar-productos">Cargar Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-blue type-text size-subtitles" routerLink="vendedores">Registrar vendedores</a>
+              <a class="nav-link text-blue type-text size-subtitles" *ngIf="menuColor === 'azul' || menuColor == 'negro' " routerLink="vendedores">Registrar vendedores</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-blue type-text size-subtitles" routerLink="/PlanesVenta"  >Crear Planes Venta</a>
+              <a class="nav-link text-blue type-text size-subtitles" *ngIf="menuColor === 'azul' || menuColor == 'negro' " routerLink="/PlanesVenta"  >Crear Planes Venta</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-blue type-text size-subtitles" href="#">Consultar Reportes</a>
+              <a class="nav-link text-blue type-text size-subtitles" *ngIf="menuColor === 'azul' || menuColor == 'negro' "  routerLink="reportes">Consultar Reportes</a>
             </li>
             <li class="nav-item">
   
-              <a class="nav-link text-blue type-text size-subtitles" routerLink="productos/consultarProductos">Consultar Productos</a>
+              <a class="nav-link text-blue type-text size-subtitles"  *ngIf="menuColor === 'azul' || menuColor == 'negro' " routerLink="productos/consultarProductos">Consultar Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-blue type-text size-subtitles" routerLink="rutasEntrega/rutas">Generar Rutas de Entrega</a>
+              <a class="nav-link text-blue type-text size-subtitles" *ngIf="menuColor === 'azul' || menuColor == 'negro' " routerLink="rutasEntrega/rutas">Generar Rutas de Entrega</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-black type-text size-subtitles" href="#">Gestionar Roles y Permisos</a>
+              <a class="nav-link text-black type-text size-subtitles" *ngIf="menuColor === 'negro'" href="#">Gestionar Roles y Permisos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-black type-text size-subtitles" routerLink="/Auditar">Auditar Sistema</a>
+              <a class="nav-link text-black type-text size-subtitles" *ngIf="menuColor === 'negro'"routerLink="/Auditar">Auditar Sistema</a>
             </li>
           </ul>
+          <li class="nav-item">
+            <a class="nav-link cerrar-sesion" (click)="cerrarSesion()">Cerrar sesión</a>
+          </li>
         </div>
       </div>
 
       <div class="col-12 col-md-8 align-items-center">
+        <div class="bienvenida" *ngIf="esPantallaInicio()">
+          <h1 class="bienvenido-texto">Bienvenidos</h1>
+        </div>
         <router-outlet></router-outlet>
       </div>
+
+      <footer class="footer">
+        <span class="version">Versión: {{ version }}</span>
+      </footer>
       
   </div>
-  <footer class="footer">
-    <span class="version">Versión: {{ version }}</span>
-  </footer>
+  </div>
+  </div>
+  
+</ng-container>
+
+<!-- Si no está autenticado, solo muestra login -->
+<ng-template #loginOnly>
+  <router-outlet></router-outlet>
+</ng-template>
+ 
+
+  

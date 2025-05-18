@@ -16,7 +16,9 @@ export class ProductoService {
   constructor(private readonly http: HttpClient) {}
 
   guardarProducto(producto: any): Observable<any> {
-    return this.http.post<any>(this.crearUrl, producto);
+    return this.http.post<any>(this.crearUrl, producto, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   uploadFile(file: File): Observable<any> {
@@ -31,7 +33,9 @@ export class ProductoService {
   }
 
   obtenerProductos(): Observable<any> {
-    return this.http.get<any>(this.consultarUrl);
+    return this.http.get<any>(this.consultarUrl, {
+      headers: this.getAuthHeaders()
+    });
   }
   agregarProductos(planId: string, productos: { idProducto: number; valorTotal: number }[]): Observable<any> {
     
@@ -48,5 +52,15 @@ export class ProductoService {
     const url = `${this.bodegasUrl}/${productoId}/bodegas`;
     console.log("URLBODEGAS"+url);
     return this.http.get<any>(url);
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); // O sessionStorage
+    console.log('token'+token)
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
   }
 }

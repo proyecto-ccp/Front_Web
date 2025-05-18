@@ -1,0 +1,25 @@
+.card_1{
+    width: 797px;
+    height: 187px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.card_2{
+    width: 515px;
+    height: 352px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.button{
+    background-color: #B0C5D6;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+    width: 250px;
+    height: 41.75px;
+    align-items: center;
+    
+    
+  }
+.boton_centro{
+  justify-content: center;
+}

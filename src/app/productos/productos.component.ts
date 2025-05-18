@@ -20,6 +20,8 @@ export class ProductosComponent implements OnInit {
   marcas: any[] = []; 
   material : any[] = [];
   color: any[] = [];
+  mensajeError='';
+  mensaje='';
   modelo: any[] = [];
   categoria: any[]=[];
   medida: any[]=[];
@@ -43,8 +45,18 @@ export class ProductosComponent implements OnInit {
   constructor(private readonly marcaService: MarcaService, private readonly MaterialService: MaterialService,private readonly ColorService: ColorService, private readonly ModeloService: ModeloService, private readonly CategoriaService: CategoriaService, private readonly MedidaService: MedidaService, private readonly ProductoService: ProductoService, private readonly FabricanteServive: FabricantesService) { }
   onFileChange(event: any): void {
     const file = event.target.files[0];
+  
     if (file) {
+      const isCsv = file.name.toLowerCase().endsWith('.csv');
+  
+      if (!isCsv) {
+        this.mensajeError = 'Solo se permiten archivos CSV';
+        this.selectedFile = null;
+        return;
+      }
+  
       this.selectedFile = file;
+      this.mensajeError = '';  // Limpia errores anteriores si todo está bien
     }
   }
   ngOnInit() {
@@ -61,6 +73,7 @@ export class ProductosComponent implements OnInit {
         },
       (error) => {
         console.error('Error al obtener las marcas', error);
+        this.mensajeError = 'Error al cargar datos';
       }
     );
   }
@@ -72,6 +85,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los materiales', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
   }
@@ -83,6 +97,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los Colores', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
 
@@ -96,6 +111,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los modelos', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
 
@@ -109,6 +125,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los categoria', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
   }
@@ -120,6 +137,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los categoria', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
 
@@ -131,14 +149,16 @@ export class ProductosComponent implements OnInit {
       (response) => {
         console.log('Producto guardado correctamente', response);
         this.limpiarFormulario();
-        alert('Producto guardado correctamente');
+        alert('Producto guardado correctamente'+response);
+        this.mensaje='Producto guardado correctamente'+response.mensaje;
 
       },
       (error) => {
         console.error('Error al guardar el producto', error);
         console.error('Detalle del error', error.error);
         console.log('json',this.productos )
-        alert('Error al guardar el producto');
+        alert('Error al guardar el producto'+error);
+        this.mensajeError='Error al guardar el producto';
       }
     );
   }
@@ -184,6 +204,7 @@ export class ProductosComponent implements OnInit {
       },
       error => {
         console.error('Error al obtener los productos:', error);
+        this.mensajeError = 'Error al cargar datos';
       }
     );
   }
@@ -196,6 +217,7 @@ export class ProductosComponent implements OnInit {
       },
     (error) => {
       console.error('Error al obtener los categoria', error);
+      this.mensajeError = 'Error al cargar datos';
     }
   );
 
