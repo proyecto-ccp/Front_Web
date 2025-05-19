@@ -33,23 +33,27 @@ export class AuditarComponent implements OnInit {
       alert('Selecciona las fechas correctamente.');
       return;
     }
-  
+
+    const fechaInicioISO = this.fechaInicio.toISOString();
+    const fechaFinISO = this.fechaFin.toISOString();
+
     const fechaInicioFormatted = this.fechaInicio.toISOString().split('T')[0];
-    const fechaFinFormatted = this.fechaFin.toISOString().split('T')[0];
-  
-    this.auditoriaService.obtenerAuditoriasPorFecha(fechaInicioFormatted, fechaFinFormatted)
+const fechaFinFormatted = this.fechaFin.toISOString().split('T')[0];
+
+    this.auditoriaService.obtenerAuditoriasPorFecha(new Date(fechaInicioISO), new Date(fechaInicioISO))
       .subscribe({
         next: (data) => {
           this.auditorias = data.auditorias || [];
           this.paginaActual = 1;
-  
+
+          // Extraer usuarios únicos
           const mapaUsuarios = new Map<string, string>();
           this.auditorias.forEach(a => {
             if (!mapaUsuarios.has(a.idUsuario)) {
               mapaUsuarios.set(a.idUsuario, a.userName);
             }
           });
-  
+
           this.usuarios = Array.from(mapaUsuarios.entries()).map(([id, userName]) => ({ id, userName }));
         },
         error: (err) => {
