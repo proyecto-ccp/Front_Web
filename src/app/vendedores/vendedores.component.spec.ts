@@ -117,7 +117,9 @@ describe('VendedoresComponent', () => {
       correo: 'juan.perez@example.com',
       telefono: '300-1234567',
       direccion: 'Calle 123',
-      idzona: 'zona-001'
+      idzona: 'zona-001',
+      contrasena:'abc12345678',
+      idUsuario:'81f78b2c-2c3a-4e05-85e4-97900435b8b2'
     };
     mockVendedorService.guardarVendedores.and.returnValue(of({ message: 'Vendedor guardado correctamente.' }));
     component.vendedor = vendedor;
@@ -147,7 +149,9 @@ describe('VendedoresComponent', () => {
       correo: 'carlos@example.com',
       telefono: '3001234567',
       direccion: 'Calle 1',
-      idzona: 'zona1'
+      idzona: 'zona1',
+      contrasena:'abc12345678',
+      idUsuario:'81f78b2c-2c3a-4e05-85e4-97900435b8b2'
     };
 
     mockVendedorService.guardarVendedores.and.returnValue(of({ message: 'Vendedor guardado correctamente.' }));
@@ -193,6 +197,15 @@ describe('VendedoresComponent', () => {
 
     expect(mockZonasService.getZonas).toHaveBeenCalledWith('1');
     expect(component.zonas).toEqual(zonas)
+  });
+  it('debería limpiar el formulario', () => {
+    component.vendedor.nombre = 'Test';
+    component.limpiarFormulario();
+    expect(component.vendedor.nombre).toBe('');
+  });
+  it('debería devolver el nombre del campo o el mismo nombre si no está mapeado', () => {
+    expect(component.obtenerNombreCampo('nombre')).toBe('Nombre');
+    expect(component.obtenerNombreCampo('campoDesconocido')).toBe('campoDesconocido');
   });
 });
 

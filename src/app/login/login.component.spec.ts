@@ -12,6 +12,7 @@ interface LoginResponse {
   token: string;
   menu: string;
   status: number;
+  idusuario:string; 
 }
 
 describe('LoginComponent', () => {
@@ -54,12 +55,13 @@ describe('LoginComponent', () => {
 
   it('debería iniciar sesión exitosamente con credenciales correctas', () => {
     const mockResponse: LoginResponse = {
-      resultado: 1,
-      mensaje: 'Login exitoso',
-      token: 'token123',
-      menu: 'oscuro',
-      status: 1
-    };
+        resultado: 1,
+        mensaje: 'Inicio de sesión exitoso',
+        token: 'fake-token',
+        menu: 'menu-azul',
+        status: 200,
+        idusuario: '12345678-abcd-efgh-ijkl-987654321000' // 👈 Obligatorio
+      };
 
     authServiceSpy.login.and.returnValue(of(mockResponse));
 

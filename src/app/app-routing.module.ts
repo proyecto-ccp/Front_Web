@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { InicioComponent } from './login/inicio/inicio.component';
 import { ReporteComponent } from './reporte/reporte.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AsociarPedidoComponent } from './rutasEntrega/rutas/asociar-pedido/asociar-pedido.component';
 
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'asociar-vendedor/:planId',component: AsociarVendedorComponent, canActivate: [AuthGuard] },
   {path: 'consultarBodegas/:productoId',component: ConsultarBodegasComponent, canActivate: [AuthGuard]  },
   {path: 'reportes',component: ReporteComponent, canActivate: [AuthGuard] },
+  {path:  'asociarPedido/:idRuta',component:AsociarPedidoComponent, canActivate: [AuthGuard]},
   {path: 'inicio',component: InicioComponent, canActivate: [AuthGuard]},
    // redirige raíz a inicio
  // { path: '', redirectTo: 'login', pathMatch: 'full' }

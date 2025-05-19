@@ -13,10 +13,10 @@ export class AuditoriaService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerAuditoriasPorFecha(fechaInicio: Date, fechaFin: Date): Observable<any> {
+  obtenerAuditoriasPorFecha(fechaInicio: string, fechaFin: string): Observable<any> {
     const params = {
-      fechaInicio: fechaInicio.toISOString(), // ejemplo: 2025-05-22T16:00:00.420Z
-      fechaFin: fechaFin.toISOString()
+      fechaInicio: fechaInicio, // ejemplo: 2025-05-22T16:00:00.420Z
+      fechaFin: fechaFin
     };
   
     return this.http.get(`${this.apiUrl}/ObtenerAuditoriasPorFecha`, { params });

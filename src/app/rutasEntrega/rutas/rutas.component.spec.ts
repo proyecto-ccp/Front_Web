@@ -3,26 +3,31 @@ import { RutasComponent } from './rutas.component';
 import { RutaserviceService } from './rutaservice.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 describe('RutasComponent', () => {
   let component: RutasComponent;
   let fixture: ComponentFixture<RutasComponent>;
   let mockService: jasmine.SpyObj<RutaserviceService>;
+  let mockRouter: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
     const rutasMock = jasmine.createSpyObj('RutaserviceService', ['guardarRutas', 'obtenerRutas']);
+    const routerMock = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
       declarations: [RutasComponent],
       imports: [FormsModule],
       providers: [
-        { provide: RutaserviceService, useValue: rutasMock }
+        { provide: RutaserviceService, useValue: rutasMock },
+        { provide: Router, useValue: routerMock }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RutasComponent);
     component = fixture.componentInstance;
     mockService = TestBed.inject(RutaserviceService) as jasmine.SpyObj<RutaserviceService>;
+    mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
   it('should create the component', () => {
@@ -37,6 +42,24 @@ describe('RutasComponent', () => {
 
     expect(mockService.obtenerRutas).toHaveBeenCalled();
     expect(component.rutas).toEqual(mockRutas);
+  });
+
+  it('should fallback to raw data if rutas not provided in obtenerRutas', () => {
+    const directData = [{ id: 1, direccionOrigen: 'X', direccionDestino: 'Y' }];
+    mockService.obtenerRutas.and.returnValue(of(directData));
+
+    component.obtenerRutas();
+
+    expect(component.rutas).toEqual(directData);
+  });
+
+  it('should handle error on obtenerRutas', () => {
+    mockService.obtenerRutas.and.returnValue(throwError(() => new Error('Error cargando rutas')));
+
+    component.obtenerRutas();
+
+    expect(component.rutas.length).toBe(0);
+    expect(component.mensajeError).toBe('Error al obtener rutas.');
   });
 
   it('should set mensaje on guardarRutas success', () => {
@@ -85,12 +108,10 @@ describe('RutasComponent', () => {
     expect(component.mensajeError).toBe('Ocurrió un error al crear la ruta.');
   });
 
-  it('should handle error on obtenerRutas', () => {
-    mockService.obtenerRutas.and.returnValue(throwError(() => new Error('Error cargando rutas')));
+  it('should navigate to asociarPedido with correct ruta id', () => {
+    const ruta = { idRuta: 'abc123' };
+    component.asociarPedido(ruta);
 
-    component.obtenerRutas();
-
-    expect(component.rutas.length).toBe(0);
-    expect(component.mensajeError).toBe('Error al obtener rutas.');
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/asociarPedido', 'abc123']);
   });
 });

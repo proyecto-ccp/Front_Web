@@ -9,7 +9,7 @@ import { environment } from 'src/environment';
 export class ProductoService {
   private crearUrl = environment.apiUrl+'/api/Productos/Crear';
   private consultarUrl = environment.apiUrl+'/api/Productos/Consultar';
-  private archivoUrl = environment.apiUrl+'/api/Archivos/EnviarPlanoCsv';
+  private archivoUrl = environment.apirlArch+'/api/Archivos/EnviarPlanoCsv';
   private addPlanV=environment.apiUrlCP+'/api/PlanesVentas';
   private bodegasUrl=environment.apiUrl+'/api/Productos'
 
@@ -23,12 +23,16 @@ export class ProductoService {
 
   uploadFile(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
-
+    formData.append('File', file); // Asegúrate de usar 'File' con mayúscula si el backend lo espera así
+    
+    const token = localStorage.getItem('token');
+    formData.append('Control.Token', '');
+    console.log('token'+token);
     const headers = new HttpHeaders({
-      'Accept': 'text/plain'
+      'Accept': 'text/plain',
+      'Authorization': `Bearer ${token}` // Agrega el token en el header
     });
-
+  
     return this.http.post<any>(this.archivoUrl, formData, { headers });
   }
 

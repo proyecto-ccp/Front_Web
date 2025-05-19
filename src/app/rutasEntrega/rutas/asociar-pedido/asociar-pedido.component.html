@@ -1,3 +1,45 @@
-<p>
-  asociar-pedido works!
-</p>
+<div class="color-box">
+  <div class="color-box">
+    <h2 class="carga-productos">Registro de Vendedores</h2>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Seleccionar</th>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Vendedor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos">
+        <td>
+          <!-- Usamos un Set para determinar si el pedido está seleccionado -->
+          <input type="checkbox"
+                 [checked]="pedidosSeleccionados.has(pedido)"
+                 (change)="toggleSeleccion(pedido)">
+        </td>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.cliente.nombre }}-{{pedido.cliente.apellido}}</td>
+        <td>{{ pedido.fechaEntrega }}</td>
+        <td>{{ pedido.estadoPedido }}</td>
+        <td>{{ pedido.vendedor.nombre }}-{{pedido.vendedor.nombre}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary mt-2" (click)="asociarPedidos()" [disabled]="pedidosSeleccionados.size === 0">
+    Asociar pedidos seleccionados
+  </button>
+
+  <div *ngIf="mensajeError" class="alert alert-danger" role="alert">
+    <pre>{{ mensajeError }}</pre>
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-success" role="alert">
+    {{ mensaje }}
+  </div>
+</div>

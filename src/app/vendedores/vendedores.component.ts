@@ -4,6 +4,7 @@ import { TDocumentoService } from '../TDocumento/TDocumento.service';
 import { CiudadService } from '../ciudad/ciudad.service';
 import { ZonasService } from '../zonas/zonas.service';
 import { PaisService } from '../pais/pais.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class VendedoresComponent implements OnInit {
   indicativo: string = '';
   idPais : number = 0;
   paisSeleccionado: string ='';
-
+  contrasena:string =''
+  
 
   vendedor = {
     nombre: '',
@@ -36,7 +38,9 @@ export class VendedoresComponent implements OnInit {
     correo: '',
     telefono: '',
     direccion: '',
-    idzona: ''
+    idzona: '',
+    contrasena:'',
+    idUsuario:''
 
 
   };
@@ -46,6 +50,8 @@ export class VendedoresComponent implements OnInit {
     this.getTDocumento();
     this.getCiudades();
     this.getPaises();
+
+   
     
 
   }
@@ -119,11 +125,12 @@ export class VendedoresComponent implements OnInit {
       apellido: '',
       idTipoDocumento: 0,
       numeroDocumento: '',
-
+      contrasena:'',
       correo: '',
       telefono: '',
       direccion: '',
-      idzona: ''
+      idzona: '',
+      idUsuario:''
 
 
 
@@ -140,7 +147,8 @@ export class VendedoresComponent implements OnInit {
       correo: 'Correo',
       telefono: 'Telefono ',
       direccion: 'Dirección',
-      idzona: ' Zona'
+      idzona: ' Zona',
+      contrasena: 'contrasena'
     };
     return nombres[campo] || campo;
   }

@@ -45,6 +45,7 @@ export class LoginComponent {
           localStorage.setItem('auth', 'true');
           localStorage.setItem('token', res.token);
           localStorage.setItem('menuColor', res.menu);
+          localStorage.setItem('idusuario', res.idusuario);
           this.router.navigate(['/inicio']);
         } else {
           this.error = res.mensaje;

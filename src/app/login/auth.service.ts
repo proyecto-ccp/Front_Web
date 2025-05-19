@@ -15,6 +15,7 @@ interface LoginResponse {
   resultado: number;
   mensaje: string;
   status: number;
+  idusuario: string;
 }
 
 @Injectable({
