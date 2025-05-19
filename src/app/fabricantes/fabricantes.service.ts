@@ -12,6 +12,8 @@ export class FabricantesService {
 
 constructor(private readonly  http: HttpClient) { }
 guardarProveedores(proveedor: any): Observable<any> {
+  const idusuario = localStorage.getItem('idusuario');
+  proveedor.idusuario=idusuario;
   return this.http.post<any>(this.apiUrl, proveedor);
 }
 getProveedores(): Observable<any> {

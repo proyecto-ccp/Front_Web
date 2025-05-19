@@ -14,10 +14,8 @@
   <!-- Nombre -->
   <div>
     <label class="font">Nombre</label>
-    <input type="text" class="form-control input-design" placeholder="Nombre"
-           required name="nombre"
-           [(ngModel)]="vendedor.nombre"
-           #nombre="ngModel">
+    <input type="text" class="form-control input-design" placeholder="Nombre" required name="nombre"
+      [(ngModel)]="vendedor.nombre" #nombre="ngModel">
     <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">
       El nombre es obligatorio.
     </div>
@@ -29,10 +27,8 @@
   <!-- Apellido -->
   <div>
     <label class="font">Apellido</label>
-    <input type="text" class="form-control input-design" placeholder="Apellido"
-           required name="apellido"
-           [(ngModel)]="vendedor.apellido"
-           #apellido="ngModel">
+    <input type="text" class="form-control input-design" placeholder="Apellido" required name="apellido"
+      [(ngModel)]="vendedor.apellido" #apellido="ngModel">
     <div *ngIf="apellido.invalid && apellido.touched" class="text-danger">
       El apellido es obligatorio.
     </div>
@@ -44,10 +40,8 @@
   <!-- Tipo Documento -->
   <div>
     <label class="font">Tipo Documento</label>
-    <select class="form-select input-design"
-            required name="idTipoDocumento"
-            [(ngModel)]="vendedor.idTipoDocumento"
-            #idTipoDocumento="ngModel">
+    <select class="form-select input-design" required name="idTipoDocumento" [(ngModel)]="vendedor.idTipoDocumento"
+      #idTipoDocumento="ngModel">
       <option value="" disabled selected>Seleccione</option>
       <option *ngFor="let tipo of tipoDocumento" [value]="tipo.id">
         {{ tipo.codigo }}
@@ -64,11 +58,8 @@
   <!-- Número de Documento -->
   <div>
     <label class="font">Número de Documento</label>
-    <input type="text" class="form-control input-design" placeholder="Número de Documento"
-           required pattern="^[0-9]{5,20}$"
-           name="numeroDocumento"
-           [(ngModel)]="vendedor.numeroDocumento"
-           #numeroDocumento="ngModel">
+    <input type="text" class="form-control input-design" placeholder="Número de Documento" required
+      pattern="^[0-9]{5,20}$" name="numeroDocumento" [(ngModel)]="vendedor.numeroDocumento" #numeroDocumento="ngModel">
     <div *ngIf="numeroDocumento.invalid && numeroDocumento.touched" class="text-danger">
       Ingrese un número de 5 a 20 dígitos.
     </div>
@@ -80,10 +71,8 @@
   <!-- Correo -->
   <div>
     <label class="font">Correo</label>
-    <input type="email" class="form-control input-design" placeholder="correo@dominio.com"
-           required name="correo"
-           [(ngModel)]="vendedor.correo"
-           #correo="ngModel">
+    <input type="email" class="form-control input-design" placeholder="correo@dominio.com" required name="correo"
+      [(ngModel)]="vendedor.correo" #correo="ngModel">
     <div *ngIf="correo.invalid && correo.touched" class="text-danger">
       Ingrese un correo válido.
     </div>
@@ -94,46 +83,32 @@
 
   <div>
     <label for="basic-url" class="font">Pais</label>
-    <select class="form-select input-design"
-        [(ngModel)]="idPais"
-        name="idPais"
-        (change)="onPaisSelected()">
-  <option *ngFor="let pais of paises" [value]="pais.id">
-    {{ pais.nombre }}
-  </option>
-</select>
+    <select class="form-select input-design" [(ngModel)]="idPais" name="idPais" (change)="onPaisSelected()">
+      <option *ngFor="let pais of paises" [value]="pais.id">
+        {{ pais.nombre }}
+      </option>
+    </select>
   </div>
 
   <!-- Indicador -->
-<div>
-  <label class="font">Indicador</label>
-  <input type="text" class="form-control input-design" 
-         [value]="indicativo|| ''" 
-         readonly>
-</div>
+  <div>
+    <label class="font">Indicador</label>
+    <input type="text" class="form-control input-design" [value]="indicativo|| ''" readonly>
+  </div>
 
-<div>
-<label for="basic-url" class="font">Teléfono</label>
-<input
-  type="text"
-  class="form-control input-design"
-  placeholder="123-456-4567"
-  name="telefono"
-  maxlength="12"
-  [(ngModel)]="telefonoFormateado"
-  required
-  #telefono="ngModel">
-</div>
-  
- 
+  <div>
+    <label for="basic-url" class="font">Teléfono</label>
+    <input type="text" class="form-control input-design" placeholder="123-456-4567" name="telefono" maxlength="12"
+      [(ngModel)]="telefonoFormateado" required #telefono="ngModel">
+  </div>
+
+
 
   <!-- Dirección -->
   <div>
     <label class="font">Dirección</label>
-    <input type="text" class="form-control input-design" placeholder="Dirección"
-           required name="direccion"
-           [(ngModel)]="vendedor.direccion"
-           #direccion="ngModel">
+    <input type="text" class="form-control input-design" placeholder="Dirección" required name="direccion"
+      [(ngModel)]="vendedor.direccion" #direccion="ngModel">
     <div *ngIf="direccion.invalid && direccion.touched" class="text-danger">
       La dirección es obligatoria.
     </div>
@@ -142,33 +117,38 @@
     </div>
   </div>
 
+  <div>
+    <label for="basic-url" class="font">Contraseña</label>
+    <input type="password" class="form-control input-design" name="contrasena" [(ngModel)]="contrasena" #contrasenaCtrl="ngModel" required minlength="6"
+      [(ngModel)]="vendedor.contrasena"/>
+
+    <div *ngIf="contrasenaCtrl.invalid && contrasenaCtrl.touched" class="text-danger">
+      La contraseña es obligatoria y debe tener al menos 6 caracteres.
+    </div>
+  </div>
+
   <!-- Ciudad -->
   <div>
     <label for="basic-url" class="font">Ciudad</label>
-    <select class="form-select input-design"
-      [(ngModel)]="idCiudad"
-      name="idTipoDocumento"
+    <select class="form-select input-design" [(ngModel)]="idCiudad" name="idTipoDocumento"
       (change)="onCitySelected($event)">
-<option *ngFor="let ciudades of ciudades" [value]="ciudades.id">
-  {{ ciudades.nombre }}
-</option>
-</select>
+      <option *ngFor="let ciudades of ciudades" [value]="ciudades.id">
+        {{ ciudades.nombre }}
+      </option>
+    </select>
 
-<div>
-<label for="basic-url" class="font">Zona</label>
-<select class="form-select input-design"
-  [(ngModel)]="vendedor.idzona"
-  name="idZona">
-<option *ngFor="let zonas of zonas" [value]="zonas.id">
-{{ zonas.nombre }}
-</option>
-</select>
-</div>
+    <div>
+      <label for="basic-url" class="font">Zona</label>
+      <select class="form-select input-design" [(ngModel)]="vendedor.idzona" name="idZona">
+        <option *ngFor="let zonas of zonas" [value]="zonas.id">
+          {{ zonas.nombre }}
+        </option>
+      </select>
+    </div>
   </div>
 
   <!-- Botón -->
-  <button type="submit" class="btn btn-primary button"
-          (click)="Guardar()">
+  <button type="submit" class="btn btn-primary button" (click)="Guardar()">
     Registrar
   </button>
 </div>

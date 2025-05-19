@@ -17,6 +17,18 @@ guardarRutas(ruta: any): Observable<any> {
 obtenerRutas(): Observable<any> {
   return this.http.get<any>(this.apiUrl);
 }
+
+asociarPedidosARuta(idRuta: string, pedidos: { idPedido: string }[]): Observable<any> {
+  const url = `${this.apiUrl}/${idRuta}/Pedidos`;
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'accept': 'application/json'
+  });
+
+  return this.http.post(url, pedidos, { headers });
+}
+
 }
 
 

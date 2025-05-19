@@ -1,18 +1,42 @@
-/* tslint:disable:no-unused-variable */
-
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { CiudadService } from './ciudad.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from 'src/environment';
 
-describe('Service: Ciudad', () => {
+describe('CiudadService', () => {
+  let service: CiudadService;
+  let httpMock: HttpTestingController;
+
+  const mockResponse = [
+    { id: 1, nombre: 'Bogotá' },
+    { id: 2, nombre: 'Medellín' }
+  ];
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [CiudadService]
     });
+
+    service = TestBed.inject(CiudadService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should ...', inject([CiudadService], (service: CiudadService) => {
+  afterEach(() => {
+    httpMock.verify(); // Verifica que no haya peticiones pendientes
+  });
+
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  }));
+  });
+
+  it('should retrieve cities from the API via GET', () => {
+    service.getCiudad().subscribe((data) => {
+      expect(data).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrlAt}/api/Atributos/Localizacion/Ciudades`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
 });

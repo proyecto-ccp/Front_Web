@@ -94,3 +94,32 @@ h3 {
   .version {
     color: #555;
   }
+
+  .bienvenido-texto {
+    font-size: 96px;
+    font-weight: bold;
+    color: #0b0b0b;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    align-items:center;
+    width: 912px;
+    height: 175px;
+  }
+  .cerrar-sesion {
+    color: #dc3545 !important; /* Rojo fuerte */
+    font-weight: bold;
+    border: 1px solid #dc3545;
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .cerrar-sesion:hover {
+    background-color: #dc3545;
+    color: white !important;
+    text-decoration: none;
+  }

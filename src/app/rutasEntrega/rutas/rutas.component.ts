@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RutaserviceService } from './rutaservice.service';
+import { Router } from '@angular/router';
+
+interface Ruta {
+  id: string;
+ 
+}
 
 @Component({
   selector: 'app-rutas',
@@ -20,7 +26,7 @@ export class RutasComponent implements OnInit {
     metodoTransporte: ''
   };
 
-  constructor(private readonly rutaservice: RutaserviceService) {}
+  constructor(private readonly rutaservice: RutaserviceService, private router : Router) {}
 
   ngOnInit() {
     // Si deseas que guarde automáticamente al iniciar, descomenta:
@@ -66,8 +72,14 @@ export class RutasComponent implements OnInit {
       }
     });
   }
-  asociarPedido(ruta: string){
-
+  asociarPedido(idRuta: Ruta | undefined) {
+    if (!idRuta) {
+      console.error('ID de ruta no definido');
+      return;
+    }
+    console.log("Ruta"+idRuta)
+    console.log("Ruta"+idRuta.id)
+    this.router.navigate(['/asociarPedido', idRuta.id]);
   }
 }
 

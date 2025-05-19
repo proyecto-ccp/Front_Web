@@ -2,3 +2,7 @@
     width: 162px;
     height: 56px;
 }
+.break-word {
+    word-break: break-word; /* Rompe palabras largas */
+    white-space: normal;    /* Permite saltos de línea */
+  }

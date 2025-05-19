@@ -1,0 +1,69 @@
+/* Centra todo el contenedor del login */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f3f2f5;
+  }
+  
+  /* Tarjeta del login */
+  .login-card {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Estilo para el título */
+  .login-card h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Inputs */
+  .login-card .form-control {
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 15px;
+  }
+  
+  /* Botón */
+  .login-card .btn {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Mensaje de error */
+  .alert-danger {
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  /* Estilo de validación opcional */
+  input.ng-invalid.ng-touched {
+    border-color: #dc3545;
+    box-shadow: none;
+  }
+
+  .button{
+    background-color: black;
+    border-radius: 20px;
+    padding: 10px; /* Ajusta el padding si es necesario */
+    width: 267.91px;
+    height: 36.01px;
+    align-items: center;
+  }
+
+  .login-logo {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }

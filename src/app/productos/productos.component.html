@@ -1,169 +1,176 @@
-  <div class="container">
+<div class="container">
+  <div class="color-box">
     <div class="color-box">
-      <div class="color-box">
-        <h2 class="carga-productos">Carga de Productos</h2>
-        <div class="form-check form-check-inline color-box">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-            [(ngModel)]="seleccion" checked>
-          <label class="form-check-label radioButton" for="exampleRadios1">
-            Carga Individual
-          </label>
-        </div>
-  
-        <div class="form-check form-check-inline">
-          <input class="form-check-input " type="radio" name="exampleRadios" id="exampleRadios2" value="option2"
-            [(ngModel)]="seleccion">
-          <label class="form-check-label radioButton" for="exampleRadios2">
-            Cargue Masivo
-          </label>
-        </div>
-        <div *ngIf="seleccion === 'option2'">
-          <form action="/upload" method="POST" enctype="multipart/form-data " (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label for="file" class="form-label">Carga Archivo (csv)</label>
-              <input class="form-control" type="file" id="file" name="file" (change)="onFileChange($event)">
-            </div>
-  
-            <button type="submit" class="btn btn-primary button">Cargar</button>
-          </form>
-        </div>
-        <div *ngIf="seleccion === 'option1'">
-  
-          <!--Caja Nombre Producto-->
-          <div>
-            <div class="space-left-input label">
-              <label for="basic-url" class="font labelNom">Nombre Producto</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <input type="text" class="form-control input-design" placeholder="Nombre Producto" aria-label="Username"
-                [(ngModel)]="productos.nombre">
-            </div>
-          </div>
-  
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Descripción</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username"
-                [(ngModel)]="productos.descripcion">
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Proveedor</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idProveedor">
-                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Marca</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idMarca">
-                <option *ngFor="let marcas of marcas" [value]="marcas.id">{{ marcas.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Color</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idColor">
-                <option *ngFor="let color of color" [value]="color.id">{{ color.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Modelo</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idModelo">
-                <option *ngFor="let modelo of modelo" [value]="modelo.id">{{ modelo.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Categorías</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idCategoria">
-                <option *ngFor="let categoria of categoria" [value]="categoria.id">{{ categoria.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Medidas</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idMedida">
-                <option *ngFor="let medida of medida" [value]="medida.id">{{ medida.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Material</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <select class="form-select input-design" aria-label="Default select example"
-                [(ngModel)]="productos.idMaterial">
-                <option *ngFor="let material of material" [value]="material.id">{{ material.nombre }}</option>
-              </select>
-            </div>
-          </div>
-  
-  
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Precio Unitario</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
-                [(ngModel)]="productos.precioUnitario">
-            </div>
+      <h2 class="carga-productos">Carga de Productos</h2>
+      <div class="form-check form-check-inline color-box">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+          [(ngModel)]="seleccion" checked>
+        <label class="form-check-label radioButton" for="exampleRadios1">
+          Carga Individual
+        </label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input " type="radio" name="exampleRadios" id="exampleRadios2" value="option2"
+          [(ngModel)]="seleccion">
+        <label class="form-check-label radioButton" for="exampleRadios2">
+          Cargue Masivo
+        </label>
+      </div>
+      <div *ngIf="seleccion === 'option2'">
+        <form action="/upload" method="POST" enctype="multipart/form-data " (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="file" class="form-label">Carga Archivo (csv)</label>
+            <input class="form-control" type="file" id="file" name="file" (change)="onFileChange($event)">
           </div>
 
-          <div>
-            <div class="space-left-input">
-              <label for="basic-url" class="font label">Cantidad</label>
-            </div>
-            <div class="d-flex justify-content-center">
-              <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
-                [(ngModel)]="productos.cantidad">
-            </div>
+          <button type="submit" class="btn btn-primary button">Cargar</button>
+        </form>
+      </div>
+      <div *ngIf="seleccion === 'option1'">
+
+        <!--Caja Nombre Producto-->
+        <div>
+          <div class="space-left-input label">
+            <label for="basic-url" class="font labelNom">Nombre Producto</label>
           </div>
-  
-  
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary button" (click)="Guardar()">Guardar</button>
+            <input type="text" class="form-control input-design" placeholder="Nombre Producto" aria-label="Username"
+              [(ngModel)]="productos.nombre">
           </div>
-  
         </div>
+
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Descripción</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <input type="text" class="form-control input-design" placeholder="Descripción" aria-label="Username"
+              [(ngModel)]="productos.descripcion">
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Proveedor</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idProveedor">
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Marca</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idMarca">
+              <option *ngFor="let marcas of marcas" [value]="marcas.id">{{ marcas.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Color</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idColor">
+              <option *ngFor="let color of color" [value]="color.id">{{ color.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Modelo</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idModelo">
+              <option *ngFor="let modelo of modelo" [value]="modelo.id">{{ modelo.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Categorías</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idCategoria">
+              <option *ngFor="let categoria of categoria" [value]="categoria.id">{{ categoria.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Medidas</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idMedida">
+              <option *ngFor="let medida of medida" [value]="medida.id">{{ medida.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Material</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select class="form-select input-design" aria-label="Default select example"
+              [(ngModel)]="productos.idMaterial">
+              <option *ngFor="let material of material" [value]="material.id">{{ material.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Precio Unitario</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
+              [(ngModel)]="productos.precioUnitario">
+          </div>
+        </div>
+
+        <div>
+          <div class="space-left-input">
+            <label for="basic-url" class="font label">Cantidad</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <input type="text" class="form-control input-design" placeholder="Precio Unitario" aria-label="Username"
+              [(ngModel)]="productos.cantidad">
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary button" (click)="Guardar()">Guardar</button>
+        </div>
+        <!-- Mensaje general de error del servidor -->
+        <div *ngIf="mensajeError" class="alert alert-danger" role="alert">
+          <pre>{{ mensajeError }}</pre>
+        </div>
+        <div *ngIf="mensaje" class="alert alert-success" role="alert">
+          {{ mensaje }}
+        </div>
+
       </div>
     </div>
-  
   </div>
+
+</div>
