@@ -5,6 +5,8 @@ import { CiudadService } from '../ciudad/ciudad.service';
 import { ZonasService } from '../zonas/zonas.service';
 import { PaisService } from '../pais/pais.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthGuard } from '../guards/auth.guard';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -44,9 +46,14 @@ export class VendedoresComponent implements OnInit {
 
 
   };
-  constructor(private readonly vendedorService: vendedorService, private readonly TDocumentoService: TDocumentoService, private readonly ciudadService: CiudadService, private readonly zonasService: ZonasService, private readonly paisService: PaisService) { }
+  constructor(private readonly vendedorService: vendedorService, private readonly TDocumentoService: TDocumentoService, private readonly ciudadService: CiudadService, private readonly zonasService: ZonasService, private readonly paisService: PaisService, private authService: AuthGuard, private router: Router) { }
 
   ngOnInit() {
+
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.getTDocumento();
     this.getCiudades();
     this.getPaises();
@@ -67,7 +74,12 @@ export class VendedoresComponent implements OnInit {
     console.log('Teléfono final con indicativo:', this.vendedor.telefono);
     // Llamar al servicio para guardar el producto
     console.log(this.vendedor.telefono);
-  
+    if (!this.vendedor.idzona) {
+      this.mensajeError = 'Debe seleccionar una zona.';
+      return;
+    }
+    
+    
     this.vendedor.idTipoDocumento = Number(this.vendedor.idTipoDocumento);
     this.vendedorService.guardarVendedores(this.vendedor).subscribe(
       (response) => {

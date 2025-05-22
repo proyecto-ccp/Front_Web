@@ -7,6 +7,8 @@ import {CategoriaService} from '../categoria/categoria.service'
 import { MedidaService } from '../medida/medida.service';
 import { ProductoService } from './producto.service';
 import { FabricantesService } from '../fabricantes/fabricantes.service';
+import { AuthGuard } from '../guards/auth.guard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
@@ -42,7 +44,7 @@ export class ProductosComponent implements OnInit {
     cantidad: 0
   };
   selectedFile: File | null = null;
-  constructor(private readonly marcaService: MarcaService, private readonly MaterialService: MaterialService,private readonly ColorService: ColorService, private readonly ModeloService: ModeloService, private readonly CategoriaService: CategoriaService, private readonly MedidaService: MedidaService, private readonly ProductoService: ProductoService, private readonly FabricanteServive: FabricantesService) { }
+  constructor(private router:Router, private readonly marcaService: MarcaService, private readonly MaterialService: MaterialService,private readonly ColorService: ColorService, private readonly ModeloService: ModeloService, private readonly CategoriaService: CategoriaService, private readonly MedidaService: MedidaService, private readonly ProductoService: ProductoService, private readonly FabricanteServive: FabricantesService, private authService: AuthGuard) { }
   onFileChange(event: any): void {
     const file = event.target.files[0];
   
@@ -60,6 +62,10 @@ export class ProductosComponent implements OnInit {
     }
   }
   ngOnInit() {
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.getMaterial();
     this.getColor();
     this.getModelo();

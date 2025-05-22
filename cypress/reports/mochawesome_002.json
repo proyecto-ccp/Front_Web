@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-05-22T18:29:07.487Z",
+    "end": "2025-05-22T18:29:59.126Z",
+    "duration": 51639,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e7965da9-a1c6-43f5-8697-09f2fa3f2f88",
+      "title": "",
+      "fullFile": "cypress\\e2e\\vendedores.cy.ts",
+      "file": "cypress\\e2e\\vendedores.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "958b115b-c062-4e51-b88c-8a509aab491f",
+          "title": "Formulario de Registro de Vendedores",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Debe mostrar el título de Registro de Vendedores",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar el título de Registro de Vendedores",
+              "timedOut": null,
+              "duration": 6950,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.carga-productos')\n    .should('exist') // Verifica que existe\n    .and('contain.text', 'Registro de Vendedores'); // Verifica el contenido",
+              "err": {},
+              "uuid": "379e887e-d95d-421d-ba19-8e8639639cb7",
+              "parentUUID": "958b115b-c062-4e51-b88c-8a509aab491f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe mostrar errores al intentar registrar con campos vacíos",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar errores al intentar registrar con campos vacíos",
+              "timedOut": null,
+              "duration": 12814,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.contains('El campo Nombre es obligatorio').should('exist');",
+              "err": {},
+              "uuid": "95fc4d4b-f686-45bd-8af8-ecba2358acf3",
+              "parentUUID": "958b115b-c062-4e51-b88c-8a509aab491f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe permitir registrar un vendedor correctamente (mock)",
+              "fullTitle": "Formulario de Registro de Vendedores Debe permitir registrar un vendedor correctamente (mock)",
+              "timedOut": null,
+              "duration": 18263,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Llenar el formulario\ncy.get('input[placeholder=\"Nombre\"]').type('Juanas');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.wait(500);\ncy.get('select[name=\"idTipoDocumento\"]').select(\"1\");\ncy.wait(500); // Reemplaza según valor real\ncy.get('input[placeholder=\"Número de Documento\"]').type('12345678');\ncy.get('input[placeholder=\"correo@dominio.com\"]').type('juan.perezas@example.com');\ncy.wait(500);\n// País y ciudad (requieren esperar por carga de datos desde el servidor)\ncy.get('select[name=\"idPais\"]', { timeout: 10000 }).should('exist').select(\"Colombia\"); // Reemplaza ID según valor válido\ncy.wait(500); // Esperar por carga del indicativo\ncy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.wait(1000);\ncy.get('input[placeholder=\"123-456-4567\"]').type('312-123-4567');\ncy.get('input[placeholder=\"Dirección\"]').type('Calle Falsa 123');\ncy.get('input[name=\"contrasena\"]').type('123456');\n// Asegúrate que existan opciones cargadas\n// Enviar formulario\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.wait(1000);\n// Esperar a la respuesta mock y validar mensaje\ncy.contains('Vendedor guardado correctamente.').should('exist');",
+              "err": {},
+              "uuid": "a12da02f-a2a2-439b-9867-380ef83d6b6d",
+              "parentUUID": "958b115b-c062-4e51-b88c-8a509aab491f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe mostrar errores del backend si los hay",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar errores del backend si los hay",
+              "timedOut": null,
+              "duration": 13397,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/vendedores', {\n    statusCode: 400,\n    body: {\n        errors: {\n            nombre: ['El nombre ya existe'],\n            correo: ['El correo no es válido'],\n        }\n    }\n}).as('guardarError');\ncy.get('input[placeholder=\"Nombre\"]').type('Juan');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.get('select[name=\"idTipoDocumento\"]').select(1);\ncy.get('input[placeholder=\"Número de Documento\"]').type('12345678');\ncy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.get('input[placeholder=\"correo@dominio.com\"]').type('correoInvalido');\ncy.get('select[name=\"idPais\"]').select(\"1\");\ncy.wait(1000);\ncy.get('input[placeholder=\"123-456-4567\"]').type('312-123-4567');\ncy.get('input[placeholder=\"Dirección\"]').type('Calle Falsa 123');\ncy.get('input[name=\"contrasena\"]').type('123456');\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.wait(1000);\ncy.contains('El formato del correo no es válido').should('exist');",
+              "err": {},
+              "uuid": "b7bd70b6-05e5-411e-a40a-cf065f37070a",
+              "parentUUID": "958b115b-c062-4e51-b88c-8a509aab491f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "379e887e-d95d-421d-ba19-8e8639639cb7",
+            "95fc4d4b-f686-45bd-8af8-ecba2358acf3",
+            "a12da02f-a2a2-439b-9867-380ef83d6b6d",
+            "b7bd70b6-05e5-411e-a40a-cf065f37070a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 51424,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 3,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-05-22T18:30:53.384Z",
+    "end": "2025-05-22T18:31:43.993Z",
+    "duration": 50609,
+    "testsRegistered": 4,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1c854641-b80b-4d35-9f89-f0fd694013b3",
+      "title": "",
+      "fullFile": "cypress\\e2e\\vendedores.cy.ts",
+      "file": "cypress\\e2e\\vendedores.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3e41fe19-90a1-48e2-932f-b332e52c63b8",
+          "title": "Formulario de Registro de Vendedores",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Debe mostrar el título de Registro de Vendedores",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar el título de Registro de Vendedores",
+              "timedOut": null,
+              "duration": 7274,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.carga-productos')\n    .should('exist') // Verifica que existe\n    .and('contain.text', 'Registro de Vendedores'); // Verifica el contenido",
+              "err": {},
+              "uuid": "d5f6f4f0-1ae0-497a-ae21-92504eea8135",
+              "parentUUID": "3e41fe19-90a1-48e2-932f-b332e52c63b8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe mostrar errores al intentar registrar con campos vacíos",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar errores al intentar registrar con campos vacíos",
+              "timedOut": null,
+              "duration": 9675,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.contains('El campo Nombre es obligatorio').should('exist');",
+              "err": {},
+              "uuid": "a72a22a9-6e1e-4f5c-98b7-73722cc204d1",
+              "parentUUID": "3e41fe19-90a1-48e2-932f-b332e52c63b8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe permitir registrar un vendedor correctamente (mock)",
+              "fullTitle": "Formulario de Registro de Vendedores Debe permitir registrar un vendedor correctamente (mock)",
+              "timedOut": null,
+              "duration": 19554,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Llenar el formulario\ncy.get('input[placeholder=\"Nombre\"]').type('Juanas');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.wait(500);\ncy.get('select[name=\"idTipoDocumento\"]').select(\"1\");\ncy.wait(500); // Reemplaza según valor real\ncy.get('input[placeholder=\"Número de Documento\"]').type('12345678');\ncy.get('input[placeholder=\"correo@dominio.com\"]').type('juan.perezas@example.com');\ncy.wait(500);\n// País y ciudad (requieren esperar por carga de datos desde el servidor)\ncy.get('select[name=\"idPais\"]', { timeout: 10000 }).should('exist').select(\"Colombia\"); // Reemplaza ID según valor válido\ncy.wait(500); // Esperar por carga del indicativo\ncy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.wait(1000);\ncy.get('input[placeholder=\"123-456-4567\"]').type('312-123-4567');\ncy.get('input[placeholder=\"Dirección\"]').type('Calle Falsa 123');\ncy.get('input[name=\"contrasena\"]').type('123456');\n// Asegúrate que existan opciones cargadas\n// Enviar formulario\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.wait(1000);\n// Esperar a la respuesta mock y validar mensaje\ncy.contains('Vendedor guardado correctamente.').should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Vendedor guardado correctamente.' but never did.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Vendedor guardado correctamente.' but never did.\n    at Context.eval (webpack://cpp-frontend/./cypress/e2e/vendedores.cy.ts:69:54)",
+                "diff": null
+              },
+              "uuid": "433a93ea-fbf6-4dc7-a4cc-3762a285210a",
+              "parentUUID": "3e41fe19-90a1-48e2-932f-b332e52c63b8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe mostrar errores del backend si los hay",
+              "fullTitle": "Formulario de Registro de Vendedores Debe mostrar errores del backend si los hay",
+              "timedOut": null,
+              "duration": 13924,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/vendedores', {\n    statusCode: 400,\n    body: {\n        errors: {\n            nombre: ['El nombre ya existe'],\n            correo: ['El correo no es válido'],\n        }\n    }\n}).as('guardarError');\ncy.get('input[placeholder=\"Nombre\"]').type('Juan');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.get('select[name=\"idTipoDocumento\"]').select(1);\ncy.get('input[placeholder=\"Número de Documento\"]').type('12345678');\ncy.get('select[name=\"Ciudad\"]').select(1);\ncy.wait(1000);\ncy.get('select[name=\"idZona\"]').select(1);\ncy.get('input[placeholder=\"correo@dominio.com\"]').type('correoInvalido');\ncy.get('select[name=\"idPais\"]').select(\"1\");\ncy.wait(1000);\ncy.get('input[placeholder=\"123-456-4567\"]').type('312-123-4567');\ncy.get('input[placeholder=\"Dirección\"]').type('Calle Falsa 123');\ncy.get('input[name=\"contrasena\"]').type('123456');\ncy.wait(1000);\ncy.get('button[name=\"registrar\"]').click();\ncy.wait(1000);\ncy.contains('El formato del correo no es válido').should('exist');",
+              "err": {},
+              "uuid": "b6ded817-1836-4750-9ff3-458e7050dea8",
+              "parentUUID": "3e41fe19-90a1-48e2-932f-b332e52c63b8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d5f6f4f0-1ae0-497a-ae21-92504eea8135",
+            "a72a22a9-6e1e-4f5c-98b7-73722cc204d1",
+            "b6ded817-1836-4750-9ff3-458e7050dea8"
+          ],
+          "failures": [
+            "433a93ea-fbf6-4dc7-a4cc-3762a285210a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 50427,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

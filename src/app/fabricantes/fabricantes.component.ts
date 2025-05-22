@@ -4,6 +4,8 @@ import { CiudadService } from '../ciudad/ciudad.service';
 import { TDocumentoService } from '../TDocumento/TDocumento.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PaisService } from '../pais/pais.service';
+import { AuthGuard } from '../guards/auth.guard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fabricantes',
@@ -33,9 +35,13 @@ export class FabricantesComponent implements OnInit {
   idPais : number = 0;
 
 
-  constructor(private readonly fabricantesService: FabricantesService, private readonly ciudadService: CiudadService, private readonly TDocumentoService: TDocumentoService, private paisService: PaisService) { }
+  constructor(private readonly fabricantesService: FabricantesService, private readonly ciudadService: CiudadService, private readonly TDocumentoService: TDocumentoService, private paisService: PaisService, private authService: AuthGuard, private router: Router) { }
 
   ngOnInit() {
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.getCiudades();
     this.getTDocumento();
     this.errores = {};          // Limpia errores por campo

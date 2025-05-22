@@ -52,7 +52,7 @@ export class LoginComponent {
         }
       },
       error: () => {
-        this.error = 'Error en la conexión. Intenta más tarde.';
+        this.error = 'Credenciales incorrectas';
       }
     }); 
     //if(username=='mariascoth@gmail.com'&& password == 'mariascoth@gmail.com'){

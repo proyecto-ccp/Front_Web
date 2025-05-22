@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlanesVentaService } from './planesVenta.service';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 
 interface PlanVenta {
   id: string;
@@ -31,10 +32,15 @@ export class PlanesVentaComponent implements OnInit {
 
   constructor(
     private readonly planVentaService: PlanesVentaService,
-    private router: Router
+    private router: Router,
+    private authService: AuthGuard
   ) {}
 
   ngOnInit() {
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.cargarPlanes();
   }
 

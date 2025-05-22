@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuditoriaService } from './auditoria.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
   selector: 'app-auditar',
@@ -22,10 +25,13 @@ export class AuditarComponent implements OnInit {
   // Ordenamiento
   ordenAscendente: boolean = true;
 
-  constructor(private auditoriaService: AuditoriaService) {}
-
+  constructor(private auditoriaService: AuditoriaService, private router: Router, private  authService: AuthGuard) {}
+  
   ngOnInit() {
-    // Puedes precargar si lo deseas
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
   }
 
   consultarAuditorifecha() {

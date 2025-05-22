@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { vendedorService } from 'src/app/vendedores/vendedores.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-asociar-vendedor',
@@ -18,10 +19,15 @@ export class AsociarVendedorComponent implements OnInit {
   constructor(
     private vendedorService: vendedorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthGuard
   ) {}
 
   ngOnInit() {
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.obtenerVendedores();
     this.planId = this.route.snapshot.paramMap.get('planId') || '';
   }

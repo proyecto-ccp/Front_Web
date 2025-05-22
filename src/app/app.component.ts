@@ -21,11 +21,15 @@ export class AppComponent {
     });
   }
 
+  ngOnInit() {
+    this.mostrarMenu = !!localStorage.getItem('token');
+  }
+
   cerrarSesion(): void {
-    localStorage.removeItem('auth');
-    this.router.navigate(['/login']).then(() => {
-      window.location.reload();
-    });
+    localStorage.removeItem('token');
+    this.mostrarMenu = false;
+    this.router.navigate(['/login']);
+    
   }
 
   esPantallaInicio(): boolean {

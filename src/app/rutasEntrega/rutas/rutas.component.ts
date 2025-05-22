@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RutaserviceService } from './rutaservice.service';
 import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 interface Ruta {
   id: string;
@@ -26,11 +27,13 @@ export class RutasComponent implements OnInit {
     metodoTransporte: ''
   };
 
-  constructor(private readonly rutaservice: RutaserviceService, private router : Router) {}
+  constructor(private readonly rutaservice: RutaserviceService, private router : Router,private  authService: AuthGuard) {}
 
   ngOnInit() {
-    // Si deseas que guarde automáticamente al iniciar, descomenta:
-    // this.guardarRutas();
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.obtenerRutas();
   }
 
