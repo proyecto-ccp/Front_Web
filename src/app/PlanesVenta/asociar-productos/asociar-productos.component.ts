@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from 'src/app/productos/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-asociar-productos',
@@ -24,9 +25,13 @@ filtroProveedor: string = '';
 filtroIdProducto: string = '';
 productosFiltrados: any[] = [];
 
-constructor(private route: ActivatedRoute, private productosService: ProductoService,private router: Router) {}
+constructor(private route: ActivatedRoute, private productosService: ProductoService,private router: Router, private authService: AuthGuard) {}
 
 ngOnInit() {
+  if (this.authService.isTokenExpired()) {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
   this.planId = this.route.snapshot.paramMap.get('planId') || '';
   this.cargarProductos();
   this.actualizarProductosPaginados();

@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-05-22T18:34:41.261Z",
+    "end": "2025-05-22T18:34:49.294Z",
+    "duration": 8033,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "573aa005-6403-4377-b0ed-45ca1a11d11a",
+      "title": "",
+      "fullFile": "cypress\\e2e\\confidencialidad.cy.ts",
+      "file": "cypress\\e2e\\confidencialidad.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5f30447a-b928-4bc0-b5b4-1dd67fdeeb37",
+          "title": "Confidencialidad - Acceso a rutas protegidas",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "no debería permitir acceso a /auditar sin token",
+              "fullTitle": "Confidencialidad - Acceso a rutas protegidas no debería permitir acceso a /auditar sin token",
+              "timedOut": null,
+              "duration": 2916,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.clearLocalStorage();\ncy.visit('/inicio');\ncy.wait(1000);\ncy.url().should('include', '/login');",
+              "err": {},
+              "uuid": "f271f920-6130-47a5-bffe-b78c97d47c4f",
+              "parentUUID": "5f30447a-b928-4bc0-b5b4-1dd67fdeeb37",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "debería permitir acceso a /inicio con token válido",
+              "fullTitle": "Confidencialidad - Acceso a rutas protegidas debería permitir acceso a /inicio con token válido",
+              "timedOut": null,
+              "duration": 3133,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/login');\n// Simula login\ncy.get('#username').type('UsrAdmin');\ncy.get('#password').type('UsrAdmin123');\ncy.get('button[type=\"submit\"]').click();\n// Asumimos que redirige a /auditar después del login exitoso\ncy.url().should('include', '/inicio');\ncy.wait(1000);\ncy.contains('Registrar Fabricantes').should('exist');",
+              "err": {},
+              "uuid": "9c40d5e0-3a6a-41d5-a5dc-77b65994bb52",
+              "parentUUID": "5f30447a-b928-4bc0-b5b4-1dd67fdeeb37",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "debería limpiar el token al cerrar sesión",
+              "fullTitle": "Confidencialidad - Acceso a rutas protegidas debería limpiar el token al cerrar sesión",
+              "timedOut": null,
+              "duration": 1871,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Simulamos que ya hay un token\ncy.visit('/login');\n// Simula login\ncy.get('#username').type('UsrAdmin');\ncy.get('#password').type('UsrAdmin123');\ncy.get('button[type=\"submit\"]').click();\ncy.url().should('include', '/inicio');\n// Simula acción de cerrar sesión\ncy.get('[data-cy=logout-button]').click();\n// Verifica que fue redirigido al login\ncy.url().should('include', '/login');\n// Verifica que no hay token\ncy.window().then((win) => {\n    expect(win.localStorage.getItem('token')).to.be.null;\n});",
+              "err": {},
+              "uuid": "31ad4473-2e9b-41d5-a021-9483d642a5a1",
+              "parentUUID": "5f30447a-b928-4bc0-b5b4-1dd67fdeeb37",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f271f920-6130-47a5-bffe-b78c97d47c4f",
+            "9c40d5e0-3a6a-41d5-a5dc-77b65994bb52",
+            "31ad4473-2e9b-41d5-a021-9483d642a5a1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7920,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

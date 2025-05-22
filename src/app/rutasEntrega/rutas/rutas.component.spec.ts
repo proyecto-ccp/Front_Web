@@ -109,7 +109,7 @@ describe('RutasComponent', () => {
   });
 
   it('should navigate to asociarPedido with correct ruta id', () => {
-    const ruta = { idRuta: 'abc123' };
+    const ruta = { id: 'abc123' };
     component.asociarPedido(ruta);
 
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/asociarPedido', 'abc123']);

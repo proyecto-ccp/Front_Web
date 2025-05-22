@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from './pedido.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RutaserviceService } from '../rutaservice.service';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-asociar-pedido',
@@ -18,10 +19,16 @@ export class AsociarPedidoComponent implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private rutaService: RutaserviceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthGuard,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.isTokenExpired()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
     this.idRuta = this.route.snapshot.paramMap.get('idRuta') || '';
     console.log("Ruta"+this.idRuta)
     this.obtenerPedidos('CONFIRMADO'); // o el estado que desees

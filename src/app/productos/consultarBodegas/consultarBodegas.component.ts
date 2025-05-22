@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-consultarBodegas',
@@ -14,10 +15,14 @@ export class ConsultarBodegasComponent implements OnInit {
   filtroBodega: string = '';
 bodegasFiltradas: any[] = [];
 
-  constructor(private productoService: ProductoService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private productoService: ProductoService, private router: Router,private route: ActivatedRoute, private authService: AuthGuard ) { }
 
   ngOnInit() {
     {
+      if (this.authService.isTokenExpired()) {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
       const idParam = this.route.snapshot.paramMap.get('productoId') || '';
        this.productoId = Number(idParam);
       console.log("Producto"+ this.productoId)
