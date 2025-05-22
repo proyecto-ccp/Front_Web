@@ -23,6 +23,11 @@ export class AppComponent {
 
   ngOnInit() {
     this.mostrarMenu = !!localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+
   }
 
   cerrarSesion(): void {
